@@ -3,8 +3,8 @@ import type { Image } from "deco-sites/std/components/types.ts";
 import type { EditableProps as SearchbarProps } from "$store/components/search/Searchbar.tsx";
 import type { Product, Suggestion } from "deco-sites/std/commerce/types.ts";
 
-import Alert from "./Alert.tsx";
 import Navbar from "./Navbar.tsx";
+import TopHeader from "./TopHeader.tsx";
 import { headerHeight } from "./constants.ts";
 
 export interface NavItem {
@@ -61,11 +61,12 @@ function Header({
   return (
     <>
       <header style={{ height: headerHeight }}>
-        <div class="bg-base-100 fixed w-full z-50">
-          <Alert alerts={alerts} />
-          <Navbar items={navItems} searchbar={searchbar} logo={logo} />
+        <div class="bg-base-100 sticky w-full z-50">
+          <TopHeader searchbar={searchbar} logo={logo} />
         </div>
-
+        <div class="bg-base-100 w-full z-10 pt-10">
+          <Navbar items={navItems} />
+        </div>
         <Modals
           menu={{ items: navItems }}
           searchbar={searchbar}

@@ -5,8 +5,8 @@ import type { Image as LiveImage } from "deco-sites/std/components/types.ts";
  * @titleBy alt
  */
 export interface Banner {
-  srcMobile: LiveImage;
-  srcDesktop?: LiveImage;
+  mobile: LiveImage;
+  desktop?: LiveImage;
   /**
    * @description Image alt text
    */
@@ -14,7 +14,12 @@ export interface Banner {
   /**
    * @description When you click you go to
    */
-  href: string;
+  action?: {
+    /** @description when user clicks on the image, go to this link */
+    href: string;
+    /** @description Button label */
+    label?: string;
+  };
 }
 
 export type BorderRadius =
@@ -32,12 +37,7 @@ export interface Props {
   /**
    * @description Default is 2 for mobile and all for desktop
    */
-  itemsPerLine: {
-    /** @default 2 */
-    mobile?: 1 | 2 | 3;
-    /** @default 4 */
-    desktop?: 1 | 2 | 4 | 6 | 8;
-  };
+  itemsPerLine: 1 | 2 | 3;
   /**
    * @description Item's border radius in px
    */
@@ -51,17 +51,15 @@ export interface Props {
 }
 
 const MOBILE_COLUMNS = {
-  1: "grid-cols-1",
-  2: "grid-cols-2",
-  3: "grid-cols-3",
+  1: "grid-rows-1",
+  2: "grid-rows-2",
+  3: "grid-rows-3",
 };
 
 const DESKTOP_COLUMNS = {
-  1: "sm:grid-cols-1",
-  2: "sm:grid-cols-2",
-  4: "sm:grid-cols-4",
-  6: "sm:grid-cols-6",
-  8: "sm:grid-cols-8",
+  1: "md:grid-cols-1",
+  2: "md:grid-cols-2",
+  3: "md:grid-cols-3",
 };
 
 const RADIUS_MOBILE = {
@@ -86,7 +84,7 @@ const RADIUS_DESKTOP = {
   "full": "sm:rounded-full",
 };
 
-export default function BannerGrid({
+export default function BannerCatalog({
   title,
   itemsPerLine,
   borderRadius,
@@ -106,40 +104,43 @@ export default function BannerGrid({
         )}
       <div
         class={`grid gap-4 md:gap-6 ${
-          MOBILE_COLUMNS[itemsPerLine?.mobile ?? 2]
-        } ${DESKTOP_COLUMNS[itemsPerLine?.desktop ?? 4]}`}
+          MOBILE_COLUMNS[itemsPerLine]
+        } md:grid-rows-none ${DESKTOP_COLUMNS[itemsPerLine]}`}
       >
-        {banners.map(({ href, srcMobile, srcDesktop, alt }) => (
-          <a
-            href={href}
-            class={`overflow-hidden ${
-              RADIUS_MOBILE[borderRadius.mobile ?? "none"]
-            } ${RADIUS_DESKTOP[borderRadius.desktop ?? "none"]} `}
-          >
-            <Picture>
-              <Source
-                media="(max-width: 767px)"
-                src={srcMobile}
-                width={100}
-                height={100}
-              />
-              <Source
-                media="(min-width: 768px)"
-                src={srcDesktop ? srcDesktop : srcMobile}
-                width={250}
-                height={250}
-              />
-              <img
-                class="w-full"
-                sizes="(max-width: 640px) 100vw, 30vw"
-                src={srcMobile}
-                alt={alt}
-                decoding="async"
-                loading="lazy"
-              />
-            </Picture>
-          </a>
-        ))}
+        {banners.map(({ action, mobile, desktop, alt }) => {
+          console.log(itemsPerLine, "AQUI");
+          return (
+            <a
+              href={action?.href ?? "#"}
+              class={`overflow-hidden ${
+                RADIUS_MOBILE[borderRadius.mobile ?? "none"]
+              } ${RADIUS_DESKTOP[borderRadius.desktop ?? "none"]} `}
+            >
+              <Picture>
+                <Source
+                  media="(max-width: 767px)"
+                  src={mobile}
+                  width={360}
+                  height={100}
+                />
+                <Source
+                  media="(min-width: 768px)"
+                  src={desktop ? desktop : mobile}
+                  width={360}
+                  height={100}
+                />
+                <img
+                  class="w-full"
+                  sizes="(max-width: 640px) 100vw, 30vw"
+                  src={mobile}
+                  alt={alt}
+                  decoding="async"
+                  loading="lazy"
+                />
+              </Picture>
+            </a>
+          );
+        })}
       </div>
     </section>
   );

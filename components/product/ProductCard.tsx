@@ -66,7 +66,7 @@ function ProductCard({ product, preload, itemListName, layout }: Props) {
   const id = `product-card-${productID}`;
   const productGroupID = isVariantOf?.productGroupID;
   const [front, back] = images ?? [];
-  const { listPrice, price, installments } = useOffer(offers);
+  const { listPrice, price } = useOffer(offers);
   const possibilities = useVariantPossibilities(product);
   const variants = Object.entries(Object.values(possibilities)[0] ?? {});
 
@@ -89,9 +89,9 @@ function ProductCard({ product, preload, itemListName, layout }: Props) {
     <a
       href={url && relative(url)}
       aria-label="view product"
-      class="btn btn-block"
+      class="btn btn-block rounded-3xl bg-[#0054A6] text-[#FFF]"
     >
-      {l?.basics?.ctaText || "Ver produto"}
+      {l?.basics?.ctaText || "ADICIONAR"}
     </a>
   );
 
@@ -229,26 +229,26 @@ function ProductCard({ product, preload, itemListName, layout }: Props) {
           </>
         )}
 
-        {l?.hide?.productName && l?.hide?.productDescription
-          ? ""
-          : (
-            <div class="flex flex-col gap-0">
-              {l?.hide?.productName
-                ? ""
-                : (
-                  <h2 class="truncate text-base lg:text-lg text-base-content">
-                    {name}
-                  </h2>
-                )}
-              {l?.hide?.productDescription
+        {l?.hide?.productName ? "" : (
+          <div class="flex flex-col gap-0">
+            {l?.hide?.productName
+              ? ""
+              : (
+                <h2 class="truncate text-base lg:text-lg text-base-content">
+                  {name}
+                </h2>
+              )}
+            {
+              /* {l?.hide?.productDescription
                 ? ""
                 : (
                   <p class="truncate text-sm lg:text-sm text-neutral">
                     {product.description}
                   </p>
-                )}
-            </div>
-          )}
+                )} */
+            }
+          </div>
+        )}
         {l?.hide?.allPrices ? "" : (
           <div class="flex flex-col gap-2">
             <div
@@ -258,24 +258,17 @@ function ProductCard({ product, preload, itemListName, layout }: Props) {
                   : ""
               } ${align === "center" ? "justify-center" : "justify-start"}`}
             >
-              <div
-                class={`line-through text-base-300 text-xs ${
-                  l?.basics?.oldPriceSize === "Normal" ? "lg:text-xl" : ""
-                }`}
-              >
-                {formatPrice(listPrice, offers!.priceCurrency!)}
-              </div>
               <div class="text-accent text-base lg:text-xl">
                 {formatPrice(price, offers!.priceCurrency!)}
               </div>
+              <div
+                class={`text-base-300 text-xs ${
+                  l?.basics?.oldPriceSize === "Normal" ? "lg:text-xl" : ""
+                }`}
+              >
+                {`${(100 - (100 / (listPrice ?? 0 / (price ?? 0)))).toFixed(0)}% OFF`}
+              </div>
             </div>
-            {l?.hide?.installments
-              ? ""
-              : (
-                <div class="text-base-300 text-sm lg:text-base">
-                  ou {installments}
-                </div>
-              )}
           </div>
         )}
 

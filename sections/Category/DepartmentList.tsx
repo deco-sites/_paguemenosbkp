@@ -1,4 +1,3 @@
-import Image from "deco-sites/std/components/Image.tsx";
 import Slider from "$store/components/ui/Slider.tsx";
 import type { Image as LiveImage } from "deco-sites/std/components/types.ts";
 import { useId } from "preact/hooks";
@@ -50,7 +49,7 @@ function CardText(
   );
 }
 
-function CategoryList(props: Props) {
+function DeparmentList(props: Props) {
   const id = `category-list-${useId()}`;
   const {
     header = {
@@ -99,7 +98,8 @@ function CategoryList(props: Props) {
           >
             <a
               href={href}
-              class="flex flex-col gap-4 lg:w-[280px] w-40 lg:h-auto"
+              class="flex flex-col gap-4 w-40 h-48 object-cover bg-no-repeat bg-[100%]"
+              style={image && { backgroundImage: `url(${image})` }}
             >
               {layout.categoryCard?.textPosition === "top" &&
                 (
@@ -109,19 +109,6 @@ function CategoryList(props: Props) {
                     description={description}
                     alignment={layout?.categoryCard?.textAlignment}
                   />
-                )}
-              {image &&
-                (
-                  <figure>
-                    <Image
-                      class="card w-full"
-                      src={image}
-                      alt={description || label || tag}
-                      width={160}
-                      height={195}
-                      loading="lazy"
-                    />
-                  </figure>
                 )}
               {layout.categoryCard?.textPosition === "bottom" &&
                 (
@@ -144,4 +131,4 @@ function CategoryList(props: Props) {
   );
 }
 
-export default CategoryList;
+export default DeparmentList;
