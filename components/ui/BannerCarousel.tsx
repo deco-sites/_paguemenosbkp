@@ -18,13 +18,13 @@ export interface Banner {
   alt: string;
   action?: {
     /** @description when user clicks on the image, go to this link */
-    href: string;
+    href?: string;
     /** @description Image text title */
-    title: string;
+    title?: string;
     /** @description Image text subtitle */
-    subTitle: string;
+    subTitle?: string;
     /** @description Button label */
-    label: string;
+    label?: string;
   };
 }
 
@@ -53,7 +53,7 @@ function BannerItem({ image, lcp }: { image: Banner; lcp?: boolean }) {
     <a
       href={action?.href ?? "#"}
       aria-label={action?.label}
-      class="relative h-[600px] overflow-y-hidden w-full"
+      class="relative h-40 lg:h-60 overflow-y-hidden w-full"
     >
       <Picture preload={lcp}>
         <Source
@@ -61,14 +61,14 @@ function BannerItem({ image, lcp }: { image: Banner; lcp?: boolean }) {
           fetchPriority={lcp ? "high" : "auto"}
           src={mobile}
           width={360}
-          height={600}
+          height={160}
         />
         <Source
           media="(min-width: 768px)"
           fetchPriority={lcp ? "high" : "auto"}
           src={desktop}
-          width={1440}
-          height={600}
+          width={1240}
+          height={240}
         />
         <img
           class="object-cover w-full h-full"
@@ -77,7 +77,7 @@ function BannerItem({ image, lcp }: { image: Banner; lcp?: boolean }) {
           alt={alt}
         />
       </Picture>
-      {action && (
+      {/* {action && (
         <div class="absolute top-0 bottom-0 m-auto left-0 right-0 sm:right-auto sm:left-[12%] max-h-min max-w-[235px] flex flex-col gap-4 p-4 rounded glass">
           <span class="text-6xl font-medium text-base-100">
             {action.title}
@@ -87,7 +87,7 @@ function BannerItem({ image, lcp }: { image: Banner; lcp?: boolean }) {
           </span>
           <Button class="glass">{action.label}</Button>
         </div>
-      )}
+      )} */}
     </a>
   );
 }
@@ -127,23 +127,23 @@ function Dots({ images, interval = 0 }: Props) {
 function Buttons() {
   return (
     <>
-      <div class="flex items-center justify-center z-10 col-start-1 row-start-2">
-        <Slider.PrevButton class="btn btn-circle glass">
+      <div class="z-10 col-start-1 row-start-2">
+        <Slider.PrevButton class="btn z-50 rounded-full w-10 h-10 min-h-min md:w-12 md:h-12 md:min-h-min xl:min-h-min xl:btn-lg btn-circle bg-white border border[#0054A6] divide-solid">
           <Icon
-            class="text-base-100"
+            class="text-[#0054A6] bg-white"
             size={20}
             id="ChevronLeft"
             strokeWidth={3}
           />
         </Slider.PrevButton>
       </div>
-      <div class="flex items-center justify-center z-10 col-start-3 row-start-2">
-        <Slider.NextButton class="btn btn-circle glass">
+      <div class="z-10 col-start-3 row-start-2">
+        <Slider.NextButton class="btn z-50 rounded-full w-10 h-10 min-h-min md:w-12 md:h-12 md:min-h-min xl:min-h-min xl:btn-lg btn-circle bg-white border border[#0054A6] divide-solid">
           <Icon
-            class="text-base-100"
-            size={20}
+            class="text-[#0054A6] bg-white"
+            size={25}
             id="ChevronRight"
-            strokeWidth={3}
+            strokeWidth={10}
           />
         </Slider.NextButton>
       </div>
@@ -157,7 +157,7 @@ function BannerCarousel({ images, preload, interval }: Props) {
   return (
     <div
       id={id}
-      class="grid grid-cols-[48px_1fr_48px] sm:grid-cols-[120px_1fr_120px] grid-rows-[1fr_48px_1fr_64px]"
+      class="grid grid-cols-[48px_1fr_48px] sm:grid-cols-[60px_1fr_60px] grid-rows-[100px_1fr_75px]"
     >
       <Slider class="carousel carousel-center w-full col-span-full row-span-full scrollbar-none gap-6">
         {images?.map((image, index) => (

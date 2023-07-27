@@ -14,7 +14,7 @@ function NavItem({ item }: { item: INavItem }) {
   return (
     <li class="group flex items-center">
       <a href={href} class="px-4 py-3">
-        <span class="group-hover:underline">
+        <span class="group-hover:underline text-xs">
           {label}
         </span>
       </a>
@@ -39,7 +39,7 @@ function NavItem({ item }: { item: INavItem }) {
               {children.map((node) => (
                 <li class="p-6">
                   <a class="hover:underline" href={node.href}>
-                    <span>{node.label}</span>
+                    <span class="text-xs">{node.label}</span>
                   </a>
 
                   <ul class="flex flex-col gap-1 mt-4">

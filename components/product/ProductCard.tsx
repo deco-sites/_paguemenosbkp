@@ -208,7 +208,7 @@ function ProductCard({ product, preload, itemListName, layout }: Props) {
               {skuSelector}
             </ul>
           )}
-          {l?.onMouseOver?.showCta && cta}
+          {/* {l?.onMouseOver?.showCta && cta} */}
         </figcaption>
       </figure>
       {/* Prices & Name */}
@@ -254,7 +254,7 @@ function ProductCard({ product, preload, itemListName, layout }: Props) {
             <div
               class={`flex flex-col gap-0 ${
                 l?.basics?.oldPriceSize === "Normal"
-                  ? "lg:flex-row lg:gap-2"
+                  ? "lg:flex-col lg:gap-2"
                   : ""
               } ${align === "center" ? "justify-center" : "justify-start"}`}
             >
@@ -266,7 +266,9 @@ function ProductCard({ product, preload, itemListName, layout }: Props) {
                   l?.basics?.oldPriceSize === "Normal" ? "lg:text-xl" : ""
                 }`}
               >
-                {`${(100 - (100 / (listPrice ?? 0 / (price ?? 0)))).toFixed(0)}% OFF`}
+                {listPrice && price ? `${
+                   (100 - (100 /  (listPrice / price) )).toFixed(0)
+                }% OFF` : ''}
               </div>
             </div>
           </div>
@@ -290,9 +292,7 @@ function ProductCard({ product, preload, itemListName, layout }: Props) {
         {!l?.hide?.cta
           ? (
             <div
-              class={`flex-auto flex items-end ${
-                l?.onMouseOver?.showCta ? "lg:hidden" : ""
-              }`}
+              class={`flex-auto flex items-end`}
             >
               {cta}
             </div>

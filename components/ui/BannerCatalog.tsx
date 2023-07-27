@@ -37,7 +37,7 @@ export interface Props {
   /**
    * @description Default is 2 for mobile and all for desktop
    */
-  itemsPerLine: 1 | 2 | 3;
+  itemsPerLine: 1 | 2 | 3 | 4 | 5;
   /**
    * @description Item's border radius in px
    */
@@ -54,12 +54,16 @@ const MOBILE_COLUMNS = {
   1: "grid-rows-1",
   2: "grid-rows-2",
   3: "grid-rows-3",
+  4: "grid-rows-4",
+  5: "grid-rows-5",
 };
 
 const DESKTOP_COLUMNS = {
   1: "md:grid-cols-1",
   2: "md:grid-cols-2",
   3: "md:grid-cols-3",
+  4: "md:grid-cols-4",
+  5: "md:grid-cols-5"
 };
 
 const RADIUS_MOBILE = {
@@ -91,7 +95,7 @@ export default function BannerCatalog({
   banners = [],
 }: Props) {
   return (
-    <section class="container w-full px-4 md:px-0 mx-auto">
+    <section class={`container w-full md:px-0 ${itemsPerLine === 1 && "max-w-[100%]"} mx-auto`}>
       {title &&
         (
           <div class="py-6 md:py-0 md:pb-[40px] flex items-center mt-6">
@@ -108,7 +112,6 @@ export default function BannerCatalog({
         } md:grid-rows-none ${DESKTOP_COLUMNS[itemsPerLine]}`}
       >
         {banners.map(({ action, mobile, desktop, alt }) => {
-          console.log(itemsPerLine, "AQUI");
           return (
             <a
               href={action?.href ?? "#"}

@@ -46,7 +46,7 @@ function ProductShelf({
 
       <div
         id={id}
-        class="xl:max-w-[1240px] grid grid-cols-[48px_1fr_48px] px-0 sm:px-5"
+        class="xl:max-w-screen-2xl grid grid-cols-[35px_1fr_35px] px-0 sm:px-5"
       >
         <Slider class="carousel carousel-center sm:carousel-end gap-2 col-span-full row-start-1 row-end-7 p-2">
           {products?.map((product, index) => (

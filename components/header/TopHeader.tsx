@@ -61,6 +61,7 @@ export default function TopHeader({
           aria-label="Log in"
         >
           <Icon id="User" width={20} height={20} strokeWidth={0.4} />
+  
         </a>
         {
           /* <a

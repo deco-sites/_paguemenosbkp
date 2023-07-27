@@ -65,6 +65,11 @@ function groupBanners(images: Banner[], itemsPerLine: number) {
   const itemsPerLineParam = itemsPerLine;
   for (let index = 0; index < images?.length; index += itemsPerLineParam) {
     switch (itemsPerLineParam) {
+      case 1:
+        groupBannerList = [...groupBannerList, [
+          images[index],
+        ]];
+        break
       case 2:
         groupBannerList = [...groupBannerList, [
           images[index],
@@ -122,8 +127,8 @@ function Dots({ images, interval = 0 }: CarrouselProps) {
 function Buttons() {
   return (
     <>
-      <div class="z-10 absolute left-0 top-[20%] pl-2">
-        <Slider.PrevButton class="btn btn-circle bg-white border border[#0054A6] divide-solid">
+      <div class="z-10 relative col-start-1 row-start-4">
+        <Slider.PrevButton class="btn z-50 rounded-full w-10 h-10 min-h-min md:min-h-min xl:min-h-min md:w-12 md:h-12 xl:btn-lg btn-circle bg-white border border[#0054A6] divide-solid">
           <Icon
             class="text-[#0054A6] bg-white"
             size={20}
@@ -132,8 +137,8 @@ function Buttons() {
           />
         </Slider.PrevButton>
       </div>
-      <div class="z-10 absolute right-0 top-[20%] pr-2">
-        <Slider.NextButton class="btn btn-circle bg-white border border[#0054A6] divide-solid">
+      <div class="z-10 relative col-start-3 row-start-4">
+        <Slider.NextButton class="btn z-50 rounded-full w-10 h-10 min-h-min md:min-h-min xl:min-h-min md:w-12 md:h-12 xl:btn-lg btn-circle bg-white border border[#0054A6] divide-solid">
           <Icon
             class="text-[#0054A6] bg-white"
             size={25}
@@ -155,10 +160,9 @@ function BannerCatalogCarousel(
     <section className="py-10">
       <div
         id={id}
-        className="relative inline-grid w-full"
+        className="relative grid w-full grid-cols-[42px_1fr_42px] md:grid-cols-[45px_1fr_47px]"
       >
-        <div>
-          <Slider class="carousel carousel-center w-full scrollbar-none gap-6">
+          <Slider class="carousel carousel-center w-full scrollbar-none gap-6 row-start-1 row-end-7">
             {groupBannerList.map((groupBanner: Banner[], index: number) => (
               <Slider.Item index={index} class="carousel-item w-full">
                 <BannerCatalog
@@ -169,11 +173,10 @@ function BannerCatalogCarousel(
               </Slider.Item>
             ))}
           </Slider>
-        </div>
 
         <Buttons />
 
-        <Dots images={groupBannerList} interval={interval} />
+        {/* <Dots images={groupBannerList} interval={interval} /> */}
 
         <SliderJS rootId={id} interval={interval && interval * 1e3} infinite />
       </div>

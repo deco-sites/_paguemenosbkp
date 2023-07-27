@@ -34,9 +34,9 @@ export interface Props {
    */
   itemsPerLine: {
     /** @default 2 */
-    mobile?: 1 | 2 | 3;
+    mobile?: 0 | 1 | 2 | 3;
     /** @default 4 */
-    desktop?: 1 | 2 | 4 | 6 | 8;
+    desktop?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 8;
   };
   /**
    * @description Item's border radius in px
@@ -51,15 +51,19 @@ export interface Props {
 }
 
 const MOBILE_COLUMNS = {
+  0: "grid-cols-0",
   1: "grid-cols-1",
   2: "grid-cols-2",
   3: "grid-cols-3",
 };
 
 const DESKTOP_COLUMNS = {
+  0: "sm:grid-cols-0",
   1: "sm:grid-cols-1",
   2: "sm:grid-cols-2",
+  3: "sm:grid-cols-3",
   4: "sm:grid-cols-4",
+  5: "sm:grid-cols-5",
   6: "sm:grid-cols-6",
   8: "sm:grid-cols-8",
 };
@@ -93,7 +97,7 @@ export default function BannerGrid({
   banners = [],
 }: Props) {
   return (
-    <section class="container w-full px-4 md:px-0 mx-auto">
+    <section class="container w-full px-4 pt-6 pb-2 md:px-0 mx-auto">
       {title &&
         (
           <div class="py-6 md:py-0 md:pb-[40px] flex items-center mt-6">
@@ -105,11 +109,12 @@ export default function BannerGrid({
           </div>
         )}
       <div
-        class={`grid gap-4 md:gap-6 ${
+        style={{ gridTemplateColumns: `2fr repeat(${itemsPerLine?.desktop as number - 1}, 1fr)` }}
+        class={`${!itemsPerLine?.mobile && "hidden"} md:grid gap-0 md:gap-2 ${
           MOBILE_COLUMNS[itemsPerLine?.mobile ?? 2]
         } ${DESKTOP_COLUMNS[itemsPerLine?.desktop ?? 4]}`}
       >
-        {banners.map(({ href, srcMobile, srcDesktop, alt }) => (
+        {banners.map(({ href, srcMobile, srcDesktop, alt }, index) => (
           <a
             href={href}
             class={`overflow-hidden ${
@@ -120,14 +125,14 @@ export default function BannerGrid({
               <Source
                 media="(max-width: 767px)"
                 src={srcMobile}
-                width={100}
-                height={100}
+                width={index === 0  ? 470 : 200}
+                height={300}
               />
               <Source
                 media="(min-width: 768px)"
                 src={srcDesktop ? srcDesktop : srcMobile}
-                width={250}
-                height={250}
+                width={index === 0 ? 630 : 315}
+                height={450}
               />
               <img
                 class="w-full"
