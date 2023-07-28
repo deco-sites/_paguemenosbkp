@@ -50,14 +50,20 @@ export default function Newsletter(props: Props) {
       title={title}
       description={description}
       alignment={layout?.content?.alignment === "Left" ? "left" : "center"}
-      colorReverse={isReverse}
+      colorReverse={!isReverse}
       fontSize={layout?.headerFontSize}
     />
   );
 
   const formLayout = form && (
     <form action="/" class="flex flex-col gap-4">
-      <div class="flex flex-col lg:flex-row gap-3">
+      <div
+        class={`flex ${
+          layout?.content?.alignment === "Side to side"
+            ? "flex-col md:flex-row"
+            : "flex-col gap-3"
+        }`}
+      >
         <input
           class="input input-bordered lg:w-80"
           type="text"
@@ -70,7 +76,7 @@ export default function Newsletter(props: Props) {
           {form.buttonText}
         </button>
       </div>
-      {form.helpText && (
+      {form?.helpText && form?.helpText?.length > 30 && (
         <div
           class="text-sm"
           dangerouslySetInnerHTML={{ __html: form.helpText }}
@@ -81,7 +87,7 @@ export default function Newsletter(props: Props) {
 
   const bgLayout = isReverse
     ? "bg-secondary text-secondary-content"
-    : "bg-transparent";
+    : "bg-[#0054A6]";
 
   return (
     <div
@@ -94,7 +100,9 @@ export default function Newsletter(props: Props) {
       {(!layout?.content?.alignment ||
         layout?.content?.alignment === "Center") && (
         <div
-          class={`container flex flex-col rounded p-4 gap-6 lg:p-16 lg:gap-12 ${bgLayout}`}
+          class={`container ${
+            !isReverse ? "text-white" : ""
+          } flex flex-col rounded p-4 gap-6 lg:p-16 lg:gap-12 ${bgLayout}`}
         >
           {headerLayout}
           <div class="flex justify-center">
@@ -104,7 +112,9 @@ export default function Newsletter(props: Props) {
       )}
       {layout?.content?.alignment === "Left" && (
         <div
-          class={`container flex flex-col rounded p-4 gap-6 lg:p-16 lg:gap-12 ${bgLayout}`}
+          class={`container ${
+            !isReverse ? "text-white" : ""
+          } flex flex-col rounded p-4 gap-6 lg:p-16 lg:gap-12 ${bgLayout}`}
         >
           {headerLayout}
           <div class="flex justify-start">
@@ -114,7 +124,9 @@ export default function Newsletter(props: Props) {
       )}
       {layout?.content?.alignment === "Side to side" && (
         <div
-          class={`container flex flex-col rounded justify-between lg:flex-row p-4 gap-6 lg:p-16 lg:gap-12 ${bgLayout}`}
+          class={`container items-center flex-col md:flex-row ${
+            !isReverse ? "text-white" : ""
+          } flex rounded justify-between lg:flex-row p-4 gap-6 lg:p-16 lg:gap-12 ${bgLayout}`}
         >
           {headerLayout}
           <div class="flex justify-center">

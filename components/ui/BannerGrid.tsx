@@ -109,7 +109,11 @@ export default function BannerGrid({
           </div>
         )}
       <div
-        style={{ gridTemplateColumns: `2fr repeat(${itemsPerLine?.desktop as number - 1}, 1fr)` }}
+        style={{
+          gridTemplateColumns: `2fr repeat(${
+            itemsPerLine?.desktop as number - 1
+          }, 1fr)`,
+        }}
         class={`${!itemsPerLine?.mobile && "hidden"} md:grid gap-0 md:gap-2 ${
           MOBILE_COLUMNS[itemsPerLine?.mobile ?? 2]
         } ${DESKTOP_COLUMNS[itemsPerLine?.desktop ?? 4]}`}
@@ -125,7 +129,7 @@ export default function BannerGrid({
               <Source
                 media="(max-width: 767px)"
                 src={srcMobile}
-                width={index === 0  ? 470 : 200}
+                width={index === 0 ? 470 : 200}
                 height={300}
               />
               <Source

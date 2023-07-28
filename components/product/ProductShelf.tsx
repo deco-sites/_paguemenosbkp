@@ -4,7 +4,7 @@ import ProductCard, {
 import SliderJS from "$store/islands/SliderJS.tsx";
 import Icon from "$store/components/ui/Icon.tsx";
 import Slider from "$store/components/ui/Slider.tsx";
-import Header from "$store/components/ui/SectionHeader.tsx";
+import HeaderSections from "$store/components/ui/SectionHeader2.tsx";
 import { SendEventOnLoad } from "$store/sdk/analytics.tsx";
 import { useId } from "preact/hooks";
 import { mapProductToAnalyticsItem } from "deco-sites/std/commerce/utils/productToAnalyticsItem.ts";
@@ -13,7 +13,8 @@ import type { Product } from "deco-sites/std/commerce/types.ts";
 
 export interface Props {
   products: Product[] | null;
-  title?: string;
+  titleTop?: string;
+  titleBottom?: string;
   description?: string;
   layout?: {
     headerAlignment?: "center" | "left";
@@ -24,7 +25,8 @@ export interface Props {
 
 function ProductShelf({
   products,
-  title,
+  titleTop,
+  titleBottom,
   description,
   layout,
   cardLayout,
@@ -36,11 +38,11 @@ function ProductShelf({
   }
 
   return (
-    <div class="w-full container  py-8 flex flex-col gap-12 lg:gap-16 lg:py-10">
-      <Header
-        title={title || ""}
+    <div class="w-full container py-8 flex flex-col gap-4 lg:gap-6 lg:py-10">
+      <HeaderSections
+        titleTop={titleTop}
+        titleBottom={titleBottom}
         description={description || ""}
-        fontSize={layout?.headerfontSize || "Large"}
         alignment={layout?.headerAlignment || "center"}
       />
 
@@ -56,7 +58,7 @@ function ProductShelf({
             >
               <ProductCard
                 product={product}
-                itemListName={title}
+                itemListName={`${titleTop} ${titleBottom}`}
                 layout={cardLayout}
               />
             </Slider.Item>
@@ -80,7 +82,7 @@ function ProductShelf({
           event={{
             name: "view_item_list",
             params: {
-              item_list_name: title,
+              item_list_name: `${titleTop} ${titleBottom}`,
               items: products.map((product) =>
                 mapProductToAnalyticsItem({
                   product,

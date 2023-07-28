@@ -63,7 +63,7 @@ const DESKTOP_COLUMNS = {
   2: "md:grid-cols-2",
   3: "md:grid-cols-3",
   4: "md:grid-cols-4",
-  5: "md:grid-cols-5"
+  5: "md:grid-cols-5",
 };
 
 const RADIUS_MOBILE = {
@@ -95,7 +95,11 @@ export default function BannerCatalog({
   banners = [],
 }: Props) {
   return (
-    <section class={`container w-full md:px-0 ${itemsPerLine === 1 && "max-w-[100%]"} mx-auto`}>
+    <section
+      class={`container w-full md:px-0 ${
+        itemsPerLine === 1 && "max-w-[100%]"
+      } mx-auto`}
+    >
       {title &&
         (
           <div class="py-6 md:py-0 md:pb-[40px] flex items-center mt-6">

@@ -1,26 +1,39 @@
 import Slider from "$store/components/ui/Slider.tsx";
-import type { Image as LiveImage } from "deco-sites/std/components/types.ts";
+import Image from "deco-sites/std/components/Image.tsx";
 import { useId } from "preact/hooks";
 import SliderJS from "$store/islands/SliderJS.tsx";
-import Header from "$store/components/ui/SectionHeader.tsx";
+import HeaderSections from "$store/components/ui/SectionHeader2.tsx";
+import type { Image as LiveImage } from "deco-sites/std/components/types.ts";
 
 export interface Category {
   tag?: string;
-  label: string;
+  label?: string;
   description?: string;
   href?: string;
   image?: LiveImage;
   buttonText?: string;
 }
 
+export type BorderRadius =
+  | "none"
+  | "sm"
+  | "md"
+  | "lg"
+  | "xl"
+  | "2xl"
+  | "3xl"
+  | "full";
+
 export interface Props {
   header?: {
-    title?: string;
+    titleTop?: string;
+    titleBottom?: string;
     description?: string;
   };
   list?: Category[];
   layout?: {
     headerAlignment?: "center" | "left";
+    borderRadius: BorderRadius;
     categoryCard?: {
       textPosition?: "top" | "bottom";
       textAlignment?: "center" | "left";
@@ -39,12 +52,12 @@ function CardText(
   return (
     <div
       class={`flex flex-col ${
-        alignment === "center" ? "text-center" : "text-left"
+        alignment === "left" ? "justify-start" : "justify-center"
       }`}
     >
-      {tag && <div class="text-sm text-primary">{tag}</div>}
-      {label && <h3 class="text-lg text-base-content">{label}</h3>}
-      {description && <div class="text-sm text-neutral">{description}</div>}
+      {tag && <div class="text-sm text-white">{tag}</div>}
+      {label && <h3 class="text-base lg:text-lg text-white">{label}</h3>}
+      {description && <div class="text-sm text-white">{description}</div>}
     </div>
   );
 }
@@ -53,7 +66,8 @@ function DeparmentList(props: Props) {
   const id = `category-list-${useId()}`;
   const {
     header = {
-      title: "",
+      titleTop: "",
+      titleBottom: "",
       description: "",
     },
     list = [
@@ -69,6 +83,7 @@ function DeparmentList(props: Props) {
     ],
     layout = {
       headerAlignment: "center",
+      borderRadius: "sm",
       categoryCard: {
         textPosition: "top",
         textAlignment: "center",
@@ -79,45 +94,69 @@ function DeparmentList(props: Props) {
   return (
     <div
       id={id}
-      class="container py-8 flex flex-col gap-8 lg:gap-10 text-base-content  lg:py-10"
+      class="container py-4 flex flex-col gap-4 text-base-content lg:gap-6 lg:py-6"
     >
-      <Header
-        title={header.title}
+      <HeaderSections
+        titleTop={header.titleTop}
+        titleBottom={header.titleBottom}
         description={header.description || ""}
         alignment={layout.headerAlignment || "center"}
       />
 
-      <Slider class="carousel carousel-start gap-4 lg:gap-8 row-start-2 row-end-5">
+      <Slider class="carousel carousel-start gap-4 lg:gap-6 row-start-2 row-end-5">
         {list.map((
           { tag, label, description, href, image, buttonText },
           index,
         ) => (
           <Slider.Item
             index={index}
-            class="flex flex-col gap-4 carousel-item first:pl-6 sm:first:pl-0 last:pr-6 sm:last:pr-0"
+            class={`flex flex-col gap-4 carousel-item first:pl-6 sm:first:pl-0 last:pr-6 sm:last:pr-0 rounded-${layout?.borderRadius} overflow-hidden`}
           >
             <a
               href={href}
-              class="flex flex-col gap-4 w-40 h-48 object-cover bg-no-repeat bg-[100%]"
-              style={image && { backgroundImage: `url(${image})` }}
+              class="flex flex-col gap-4 lg:w-[280px] w-40 lg:h-auto relative"
             >
-              {layout.categoryCard?.textPosition === "top" &&
-                (
+              {label && (
+                <div
+                  class={`absolute ${
+                    layout.categoryCard?.textPosition === "bottom"
+                      ? "bottom-0"
+                      : "top-0"
+                  } 
+                ${
+                    layout?.categoryCard?.textAlignment === "left"
+                      ? "justify-start"
+                      : "justify-center"
+                  } z-10 text-base flex items-center py-3 w-full bg-[#0054A6]`}
+                >
                   <CardText
                     tag={tag}
                     label={label}
                     description={description}
                     alignment={layout?.categoryCard?.textAlignment}
                   />
-                )}
-              {layout.categoryCard?.textPosition === "bottom" &&
+                </div>
+              )}
+              {image &&
                 (
-                  <CardText
-                    tag={tag}
-                    label={label}
-                    description={description}
-                    alignment={layout?.categoryCard?.textAlignment}
-                  />
+                  <div
+                    class={` bg-white ${
+                      layout.categoryCard?.textPosition === "bottom"
+                        ? "pb-14"
+                        : label && "pt-14"
+                    }`}
+                  >
+                    <figure>
+                      <Image
+                        class="w-full"
+                        src={image}
+                        alt={description || label || tag}
+                        width={190}
+                        height={label ? 124 : 155}
+                        loading="lazy"
+                      />
+                    </figure>
+                  </div>
                 )}
             </a>
             {buttonText &&

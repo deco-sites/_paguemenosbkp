@@ -266,9 +266,9 @@ function ProductCard({ product, preload, itemListName, layout }: Props) {
                   l?.basics?.oldPriceSize === "Normal" ? "lg:text-xl" : ""
                 }`}
               >
-                {listPrice && price ? `${
-                   (100 - (100 /  (listPrice / price) )).toFixed(0)
-                }% OFF` : ''}
+                {listPrice && price
+                  ? `${(100 - (100 / (listPrice / price))).toFixed(0)}% OFF`
+                  : ""}
               </div>
             </div>
           </div>

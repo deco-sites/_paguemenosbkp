@@ -10587,7 +10587,10 @@
           "title": "Tag"
         },
         "label": {
-          "type": "string",
+          "type": [
+            "string",
+            "null"
+          ],
           "title": "Label"
         },
         "description": {
@@ -10616,9 +10619,7 @@
           "title": "Button Text"
         }
       },
-      "required": [
-        "label"
-      ],
+      "required": [],
       "title": "Category"
     },
     "ZGVjby1zaXRlcy9wYWd1ZW1lbm9zL3NlY3Rpb25zL0NhdGVnb3J5L0RlcGFydG1lbnRMaXN0LnRzeA==@Category[]": {
@@ -10634,12 +10635,19 @@
         "header": {
           "type": "object",
           "properties": {
-            "title": {
+            "titleTop": {
               "type": [
                 "string",
                 "null"
               ],
-              "title": "Title"
+              "title": "Title Top"
+            },
+            "titleBottom": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "title": "Title Bottom"
             },
             "description": {
               "type": [
@@ -10674,6 +10682,52 @@
               ],
               "type": "string",
               "title": "Header Alignment"
+            },
+            "borderRadius": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "const": "none",
+                  "default": "none"
+                },
+                {
+                  "type": "string",
+                  "const": "sm",
+                  "default": "sm"
+                },
+                {
+                  "type": "string",
+                  "const": "md",
+                  "default": "md"
+                },
+                {
+                  "type": "string",
+                  "const": "lg",
+                  "default": "lg"
+                },
+                {
+                  "type": "string",
+                  "const": "xl",
+                  "default": "xl"
+                },
+                {
+                  "type": "string",
+                  "const": "2xl",
+                  "default": "2xl"
+                },
+                {
+                  "type": "string",
+                  "const": "3xl",
+                  "default": "3xl"
+                },
+                {
+                  "type": "string",
+                  "const": "full",
+                  "default": "full"
+                }
+              ],
+              "type": "string",
+              "title": "Border Radius"
             },
             "categoryCard": {
               "type": "object",
@@ -10715,7 +10769,9 @@
               "title": "Category Card"
             }
           },
-          "required": [],
+          "required": [
+            "borderRadius"
+          ],
           "title": "Layout"
         }
       },
@@ -10929,6 +10985,16 @@
                     "type": "string",
                     "const": "Visa",
                     "default": "Visa"
+                  },
+                  {
+                    "type": "string",
+                    "const": "Hipercard",
+                    "default": "Hipercard"
+                  },
+                  {
+                    "type": "string",
+                    "const": "Amex",
+                    "default": "Amex"
                   },
                   {
                     "type": "string",
@@ -11565,6 +11631,16 @@
               "type": "string",
               "const": "Visa",
               "default": "Visa"
+            },
+            {
+              "type": "string",
+              "const": "Hipercard",
+              "default": "Hipercard"
+            },
+            {
+              "type": "string",
+              "const": "Amex",
+              "default": "Amex"
             }
           ],
           "type": "string",
@@ -13238,6 +13314,16 @@
             },
             {
               "type": "string",
+              "const": "Hipercard",
+              "default": "Hipercard"
+            },
+            {
+              "type": "string",
+              "const": "Amex",
+              "default": "Amex"
+            },
+            {
+              "type": "string",
               "const": "WhatsApp",
               "default": "WhatsApp"
             },
@@ -13908,12 +13994,19 @@
           "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tbWVyY2UvdHlwZXMudHM=@Product[]|null",
           "title": "Products"
         },
-        "title": {
+        "titleTop": {
           "type": [
             "string",
             "null"
           ],
-          "title": "Title"
+          "title": "Title Top"
+        },
+        "titleBottom": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "title": "Title Bottom"
         },
         "description": {
           "type": [

@@ -10,9 +10,13 @@ export interface Props {
     description: string;
   }>;
   layout?: {
-    variation?: "Simple" | "With border" | "Color reverse" | "Background Degrade";
+    variation?:
+      | "Simple"
+      | "With border"
+      | "Color reverse"
+      | "Background Degrade";
     headerAlignment?: "center" | "left";
-    orientation: "Vertical" | "Horizontal"
+    orientation: "Vertical" | "Horizontal";
   };
 }
 
@@ -65,7 +69,13 @@ export default function Benefits(
             fill="#007DC5"
           />
         </div>
-        <div class={`flex-auto flex flex-col gap-1 ${layout?.orientation === "Horizontal" ? "w-max pr-2 lg:w-auto lg:pr-0" : ""}`}>
+        <div
+          class={`flex-auto flex flex-col gap-1 ${
+            layout?.orientation === "Horizontal"
+              ? "w-max pr-2 lg:w-auto lg:pr-0"
+              : ""
+          }`}
+        >
           <div
             class={`text-sm leading-7 font-bold ${
               reverse ? "text-base-100" : "text-base-content"
@@ -96,7 +106,13 @@ export default function Benefits(
               alignment={layout?.headerAlignment || "center"}
             />
             <div class="w-full flex justify-center overflow-x-auto max-w-[100%] lg:overflow-x-visible">
-              <div class={`flex gap-4 w-full lg:grid grid-flow-col auto-cols-fr ${layout?.orientation === "Horizontal" ? "flex-row lg:gap-6" : "flex-col lg:gap-8"}`}>
+              <div
+                class={`flex gap-4 w-full lg:grid grid-flow-col auto-cols-fr ${
+                  layout?.orientation === "Horizontal"
+                    ? "flex-row lg:gap-6"
+                    : "flex-col lg:gap-8"
+                }`}
+              >
                 {listOfBenefits}
               </div>
             </div>
@@ -111,7 +127,13 @@ export default function Benefits(
             alignment={layout?.headerAlignment || "center"}
           />
           <div class="w-full flex justify-center">
-            <div class={`${layout?.orientation === "Horizontal" ? "flex flex-row" : "flex flex-col"} gap-4 w-full py-6 px-4 border border-base-300 lg:gap-8 lg:p-10`}>
+            <div
+              class={`${
+                layout?.orientation === "Horizontal"
+                  ? "flex flex-row"
+                  : "flex flex-col"
+              } gap-4 w-full py-6 px-4 border border-base-300 lg:gap-8 lg:p-10`}
+            >
               {listOfBenefits}
             </div>
           </div>
@@ -125,15 +147,24 @@ export default function Benefits(
             alignment={layout?.headerAlignment || "center"}
           />
           <div class="w-full flex justify-center">
-            <div class={`${layout?.orientation === "Horizontal" ? "flex flex-row" : "flex flex-col"} gap-4 w-full lg:gap-8`}>
+            <div
+              class={`${
+                layout?.orientation === "Horizontal"
+                  ? "flex flex-row"
+                  : "flex flex-col"
+              } gap-4 w-full lg:gap-8`}
+            >
               {listOfBenefits}
             </div>
           </div>
         </div>
       )}
       {layout?.variation === "Background Degrade" && (
-        <div class="w-full container flex flex-col px-4 py-8 gap-8 lg:gap-10 lg:py-10 lg:px-0"
-          style={{ background: "linear-gradient(180deg,#007dc5,#f4f4f4 210px)" }}
+        <div
+          class="w-full container flex flex-col px-4 py-8 gap-8 lg:gap-10 lg:py-10 lg:px-0"
+          style={{
+            background: "linear-gradient(180deg,#007dc5,#f4f4f4 210px)",
+          }}
         >
           <Header
             title={title}
@@ -141,7 +172,13 @@ export default function Benefits(
             alignment={layout?.headerAlignment || "center"}
           />
           <div class="w-full flex justify-center">
-            <div class={`${layout?.orientation === "Horizontal" ? "flex flex-row" : "flex flex-col"} gap-4 w-full lg:gap-8`}>
+            <div
+              class={`${
+                layout?.orientation === "Horizontal"
+                  ? "flex flex-row"
+                  : "flex flex-col"
+              } gap-4 w-full lg:gap-8`}
+            >
               {listOfBenefits}
             </div>
           </div>

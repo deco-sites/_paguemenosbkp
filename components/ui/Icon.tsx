@@ -38,6 +38,8 @@ export type AvailableIcons =
   | "Twitter"
   | "User"
   | "Visa"
+  | "Hipercard"
+  | "Amex"
   | "WhatsApp"
   | "XMark"
   | "dispatchBox"

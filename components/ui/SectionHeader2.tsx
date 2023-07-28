@@ -1,5 +1,6 @@
 interface Props {
-  title?: string;
+  titleTop?: string;
+  titleBottom?: string;
   fontSize?: "Normal" | "Large";
   description?: string;
   alignment: "center" | "left";
@@ -9,27 +10,42 @@ interface Props {
 function HeaderSections(props: Props) {
   return (
     <>
-      {props.title || props.description
+      {props.titleTop || props.description
         ? (
           <div
-            class={`flex flex-col gap-2 ${
-              props.alignment === "left" ? "text-left" : "text-center"
-            }`}
+            class={`flex flex-col ${
+              props.alignment === "left" ? "justify-start" : "justify-center"
+            } border-b border-b-[#dadedc]`}
           >
-            {props.title &&
+            {props.titleTop &&
               (
                 <h1
-                  class={`text-xs leading-8 lg:leading-10 text-[#ed1d24]
+                  class={`text-xs leading-2
                   ${
                     props.colorReverse
                       ? "text-primary-content"
-                      : "text-base-content"
+                      : "text-[#ed1d24]"
                   }
-                  ${props.fontSize === "Normal" ? "lg:text-base" : "lg:text-lg"}
+                  ${props.fontSize === "Normal" ? "text-xs" : "lg:text-lg"}
                 `}
                 >
-                  {props.title}
+                  {props.titleTop}
                 </h1>
+              )}
+            {props.titleBottom &&
+              (
+                <h2
+                  class={`text-xl leading-2 font-bold pb-2
+                ${
+                    props.colorReverse
+                      ? "text-primary-content"
+                      : "text-[#565656]"
+                  }
+                ${props.fontSize === "Normal" ? "text-xl" : "lg:text-2xl"}
+                `}
+                >
+                  {props.titleBottom}
+                </h2>
               )}
             {props.description &&
               (

@@ -69,7 +69,7 @@ function groupBanners(images: Banner[], itemsPerLine: number) {
         groupBannerList = [...groupBannerList, [
           images[index],
         ]];
-        break
+        break;
       case 2:
         groupBannerList = [...groupBannerList, [
           images[index],
@@ -162,17 +162,17 @@ function BannerCatalogCarousel(
         id={id}
         className="relative grid w-full grid-cols-[42px_1fr_42px] md:grid-cols-[45px_1fr_47px]"
       >
-          <Slider class="carousel carousel-center w-full scrollbar-none gap-6 row-start-1 row-end-7">
-            {groupBannerList.map((groupBanner: Banner[], index: number) => (
-              <Slider.Item index={index} class="carousel-item w-full">
-                <BannerCatalog
-                  banners={groupBanner}
-                  borderRadius={borderRadius}
-                  itemsPerLine={itemsPerLine}
-                />
-              </Slider.Item>
-            ))}
-          </Slider>
+        <Slider class="carousel carousel-center w-full scrollbar-none gap-6 row-start-1 row-end-7">
+          {groupBannerList.map((groupBanner: Banner[], index: number) => (
+            <Slider.Item index={index} class="carousel-item w-full">
+              <BannerCatalog
+                banners={groupBanner}
+                borderRadius={borderRadius}
+                itemsPerLine={itemsPerLine}
+              />
+            </Slider.Item>
+          ))}
+        </Slider>
 
         <Buttons />
 
