@@ -33,7 +33,7 @@ export interface Props {
    * @description Default is 2 for mobile and all for desktop
    */
   itemsPerLine: {
-    /** @default 2 */
+    /** @default 0 */
     mobile?: 0 | 1 | 2 | 3;
     /** @default 4 */
     desktop?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 8;
@@ -48,6 +48,8 @@ export interface Props {
     desktop?: BorderRadius;
   };
   banners: Banner[];
+  isMainBanner?: false | true;
+  preload?: boolean;
 }
 
 const MOBILE_COLUMNS = {
@@ -95,6 +97,8 @@ export default function BannerGrid({
   itemsPerLine,
   borderRadius,
   banners = [],
+  isMainBanner = false,
+  preload,
 }: Props) {
   return (
     <section class="container w-full px-4 pt-6 pb-2 md:px-0 mx-auto">
@@ -109,11 +113,16 @@ export default function BannerGrid({
           </div>
         )}
       <div
-        style={{
-          gridTemplateColumns: `2fr repeat(${
-            itemsPerLine?.desktop as number - 1
-          }, 1fr)`,
-        }}
+        style={isMainBanner
+          ? {
+            gridTemplateColumns: `2fr repeat(${
+              itemsPerLine?.desktop as number - 1
+            }, 1fr)`,
+          }
+          : {
+            gridTemplateColumns: `repeat(${itemsPerLine
+              ?.desktop as number}, 1fr)`,
+          }}
         class={`${!itemsPerLine?.mobile && "hidden"} md:grid gap-0 md:gap-2 ${
           MOBILE_COLUMNS[itemsPerLine?.mobile ?? 2]
         } ${DESKTOP_COLUMNS[itemsPerLine?.desktop ?? 4]}`}
@@ -125,17 +134,17 @@ export default function BannerGrid({
               RADIUS_MOBILE[borderRadius.mobile ?? "none"]
             } ${RADIUS_DESKTOP[borderRadius.desktop ?? "none"]} `}
           >
-            <Picture>
+            <Picture preload={index === 0 && preload}>
               <Source
                 media="(max-width: 767px)"
                 src={srcMobile}
-                width={index === 0 ? 470 : 200}
+                width={index === 0 && isMainBanner ? 470 : 200}
                 height={300}
               />
               <Source
                 media="(min-width: 768px)"
                 src={srcDesktop ? srcDesktop : srcMobile}
-                width={index === 0 ? 630 : 315}
+                width={index === 0 && isMainBanner ? 630 : 315}
                 height={450}
               />
               <img

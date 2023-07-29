@@ -33,9 +33,13 @@ export type BorderRadius =
   | "full";
 
 export interface Props {
+  /**
+   * @description Check this option when this banner is the biggest image on the screen for image optimizations
+   */
+  preload?: boolean;
   title?: string;
   /**
-   * @description Default is 2 for mobile and all for desktop
+   * @description Items Per Line
    */
   itemsPerLine: 1 | 2 | 3 | 4 | 5;
   /**
@@ -93,6 +97,7 @@ export default function BannerCatalog({
   itemsPerLine,
   borderRadius,
   banners = [],
+  preload,
 }: Props) {
   return (
     <section
@@ -115,7 +120,7 @@ export default function BannerCatalog({
           MOBILE_COLUMNS[itemsPerLine]
         } md:grid-rows-none ${DESKTOP_COLUMNS[itemsPerLine]}`}
       >
-        {banners.map(({ action, mobile, desktop, alt }) => {
+        {banners.map(({ action, mobile, desktop, alt }, index) => {
           return (
             <a
               href={action?.href ?? "#"}
@@ -123,7 +128,7 @@ export default function BannerCatalog({
                 RADIUS_MOBILE[borderRadius.mobile ?? "none"]
               } ${RADIUS_DESKTOP[borderRadius.desktop ?? "none"]} `}
             >
-              <Picture>
+              <Picture preload={index === 0 && preload}>
                 <Source
                   media="(max-width: 767px)"
                   src={mobile}

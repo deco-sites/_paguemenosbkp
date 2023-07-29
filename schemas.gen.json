@@ -12568,6 +12568,22 @@
         "banners": {
           "$ref": "#/definitions/ZGVjby1zaXRlcy9wYWd1ZW1lbm9zL2NvbXBvbmVudHMvdWkvQmFubmVyR3JpZC50c3g=@Banner[]",
           "title": "Banners"
+        },
+        "isMainBanner": {
+          "anyOf": [
+            {
+              "type": "boolean",
+              "const": false,
+              "default": false
+            },
+            {
+              "type": "boolean",
+              "const": true,
+              "default": true
+            }
+          ],
+          "type": "boolean",
+          "title": "Is Main Banner"
         }
       },
       "required": [

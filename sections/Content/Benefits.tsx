@@ -72,12 +72,12 @@ export default function Benefits(
         <div
           class={`flex-auto flex flex-col gap-1 ${
             layout?.orientation === "Horizontal"
-              ? "w-max pr-2 lg:w-auto lg:pr-0"
+              ? "w-max md:w-[6.75rem] pr-2 lg:w-auto md:pr-0"
               : ""
           }`}
         >
           <div
-            class={`text-sm leading-7 font-bold ${
+            class={`text-sm leading-4 font-bold ${
               reverse ? "text-base-100" : "text-base-content"
             }`}
           >

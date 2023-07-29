@@ -43,9 +43,7 @@ interface CarrouselProps {
 
 export interface Props {
   images: Banner[];
-  /**
-   * @description Check this option when this banner is the biggest image on the screen for image optimizations
-   */
+  preload?: boolean;
   interval?: number;
   itemsPerLine: 1 | 2 | 3;
   /**
@@ -152,7 +150,7 @@ function Buttons() {
 }
 
 function BannerCatalogCarousel(
-  { images, interval, itemsPerLine, borderRadius }: Props,
+  { images, interval, itemsPerLine, borderRadius, preload }: Props,
 ) {
   const id = useId();
   const groupBannerList = groupBanners(images, itemsPerLine);
@@ -169,6 +167,7 @@ function BannerCatalogCarousel(
                 banners={groupBanner}
                 borderRadius={borderRadius}
                 itemsPerLine={itemsPerLine}
+                preload={preload}
               />
             </Slider.Item>
           ))}
