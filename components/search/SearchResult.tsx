@@ -42,7 +42,7 @@ function Result({
 
   return (
     <>
-      <div class="container px-4 sm:py-10">
+      <div class="container px-2 lg:px-4 sm:py-10 searchResult">
         <SearchControls
           sortOptions={sortOptions}
           filters={filters}
@@ -52,11 +52,12 @@ function Result({
 
         <div class="flex flex-row">
           {layout?.variant === "aside" && filters.length > 0 && (
-            <aside class="hidden sm:block w-min min-w-[250px]">
+            <aside class="hidden sm:block w-min min-w-[250px] max-w-[300px]">
               <Filters filters={filters} />
             </aside>
           )}
-          <div class="flex-grow">
+          <div class="flex">
+            {/* <Filters filters={filters} /> */}
             <ProductGallery products={products} layout={cardLayout} />
           </div>
         </div>

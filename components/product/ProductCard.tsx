@@ -98,7 +98,7 @@ function ProductCard({ product, preload, itemListName, layout }: Props) {
   return (
     <div
       id={id}
-      class={`w-[160px] sm:w-[240px] bg-white rounded-md card card-compact group ${
+      class={`cardProductItem w-[160px] sm:w-[240px] bg-white rounded-md card card-compact group ${
         align === "center" ? "text-center" : "text-start"
       } ${l?.onMouseOver?.showCardShadow ? "lg:hover:card-bordered" : ""}
         ${
@@ -258,18 +258,37 @@ function ProductCard({ product, preload, itemListName, layout }: Props) {
                   : ""
               } ${align === "center" ? "justify-center" : "justify-start"}`}
             >
-              <div class="text-accent text-base lg:text-xl">
-                {formatPrice(price, offers!.priceCurrency!)}
-              </div>
-              <div
-                class={`text-base-300 text-xs ${
-                  l?.basics?.oldPriceSize === "Normal" ? "lg:text-xl" : ""
-                }`}
-              >
-                {listPrice && price
-                  ? `${(100 - (100 / (listPrice / price))).toFixed(0)}% OFF`
-                  : ""}
-              </div>
+              {listPrice === price
+                ? (
+                  <div class="text-lg md:text-2xl font-bold text-[#0054a6] min-h-[64px]">
+                    {formatPrice(price, offers!.priceCurrency!)}
+                  </div>
+                )
+                : (
+                  <>
+                    <div
+                      class={`text-xs text-[rgba(237,29,36,.8)] line-through ${
+                        l?.basics?.oldPriceSize === "Normal" ? "lg:text-xl" : ""
+                      }`}
+                    >
+                      {formatPrice(listPrice, offers!.priceCurrency!)}
+                    </div>
+                    <div class="text-lg md:text-2xl font-bold text-[rgba(237,29,36,.8)]">
+                      {formatPrice(price, offers!.priceCurrency!)}
+                    </div>
+                    <div
+                      class={`text-xs text-[rgba(237,29,36,.8)] ${
+                        l?.basics?.oldPriceSize === "Normal" ? "lg:text-xl" : ""
+                      }`}
+                    >
+                      {listPrice && price
+                        ? `${
+                          (100 - (100 / (listPrice / price))).toFixed(0)
+                        }% OFF`
+                        : ""}
+                    </div>
+                  </>
+                )}
             </div>
           </div>
         )}

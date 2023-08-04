@@ -39,7 +39,7 @@ function FilterValues({ key, values }: FilterToggle) {
 
         if (key === "cor" || key === "tamanho") {
           return (
-            <a href={url}>
+            <a href={url} class="w-72">
               <Avatar
                 content={value}
                 variant={selected ? "active" : "default"}
@@ -67,11 +67,11 @@ function FilterValues({ key, values }: FilterToggle) {
 
 function Filters({ filters }: Props) {
   return (
-    <ul class="flex flex-col gap-6 p-4">
+    <ul class="flex flex-col gap-6 p-2">
       {filters
         .filter(isToggle)
         .map((filter) => (
-          <li class="flex flex-col gap-4">
+          <li class="flex flex-col gap-4 bg-white p-2 max-h-72 overflow-y-auto">
             <span>{filter.label}</span>
             <FilterValues {...filter} />
           </li>

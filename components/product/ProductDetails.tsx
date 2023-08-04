@@ -68,20 +68,16 @@ function ProductInfo({ page }: { page: ProductDetailsPage }) {
 
   return (
     <>
-      {/* Breadcrumb */}
-      <Breadcrumb
-        itemListElement={breadcrumbList?.itemListElement.slice(0, -1)}
-      />
       {/* Code and name */}
       <div class="mt-4 sm:mt-8">
+        <h1>
+          <span class="font-bold text-[1.875rem]">{name}</span>
+        </h1>
         <div>
           <span class="text-sm text-base-300">
             Cod. {gtin}
           </span>
         </div>
-        <h1>
-          <span class="font-medium text-xl">{name}</span>
-        </h1>
       </div>
       {/* Prices */}
       <div class="mt-4">
@@ -141,7 +137,10 @@ function ProductInfo({ page }: { page: ProductDetailsPage }) {
           {description && (
             <details>
               <summary class="cursor-pointer">Descrição</summary>
-              <div class="ml-2 mt-2">{description}</div>
+              <div
+                class="ml-2 mt-2"
+                dangerouslySetInnerHTML={{ __html: description }}
+              />
             </details>
           )}
         </span>
@@ -245,7 +244,10 @@ function Details({
    */
   if (variant === "slider") {
     return (
-      <>
+      <div class="flex flex-col">
+        <Breadcrumb
+          itemListElement={page?.breadcrumbList?.itemListElement.slice(0, -1)}
+        />
         <div
           id={id}
           class="grid grid-cols-1 gap-4 sm:grid-cols-[max-content_40vw_40vw] sm:grid-rows-1 sm:justify-center"
@@ -321,7 +323,7 @@ function Details({
           </div>
         </div>
         <SliderJS rootId={id}></SliderJS>
-      </>
+      </div>
     );
   }
 
@@ -332,29 +334,35 @@ function Details({
    * reached causing a scrollbar to be rendered.
    */
   return (
-    <div class="grid grid-cols-1 gap-4 sm:grid-cols-[50vw_25vw] sm:grid-rows-1 sm:justify-center">
-      {/* Image slider */}
-      <ul class="carousel carousel-center gap-6">
-        {[images[0], images[1] ?? images[0]].map((img, index) => (
-          <li class="carousel-item min-w-[100vw] sm:min-w-[24vw]">
-            <Image
-              sizes="(max-width: 640px) 100vw, 24vw"
-              style={{ aspectRatio: ASPECT_RATIO }}
-              src={img.url!}
-              alt={img.alternateName}
-              width={WIDTH}
-              height={HEIGHT}
-              // Preload LCP image for better web vitals
-              preload={index === 0}
-              loading={index === 0 ? "eager" : "lazy"}
-            />
-          </li>
-        ))}
-      </ul>
+    <div class="flex flex-col">
+      {/* Breadcrumb */}
+      <Breadcrumb
+        itemListElement={page?.breadcrumbList?.itemListElement.slice(0, -1)}
+      />
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-[50vw_25vw] sm:grid-rows-1 sm:justify-center">
+        {/* Image slider */}
+        <ul class="carousel carousel-center gap-6">
+          {[images[0], images[1] ?? images[0]].map((img, index) => (
+            <li class="carousel-item min-w-[100vw] sm:min-w-[24vw]">
+              <Image
+                sizes="(max-width: 640px) 100vw, 24vw"
+                style={{ aspectRatio: ASPECT_RATIO }}
+                src={img.url!}
+                alt={img.alternateName}
+                width={WIDTH}
+                height={HEIGHT}
+                // Preload LCP image for better web vitals
+                preload={index === 0}
+                loading={index === 0 ? "eager" : "lazy"}
+              />
+            </li>
+          ))}
+        </ul>
 
-      {/* Product Info */}
-      <div class="px-4 sm:pr-0 sm:pl-6">
-        <ProductInfo page={page} />
+        {/* Product Info */}
+        <div class="px-4 sm:pr-0 sm:pl-6">
+          <ProductInfo page={page} />
+        </div>
       </div>
     </div>
   );
