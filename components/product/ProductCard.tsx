@@ -98,7 +98,7 @@ function ProductCard({ product, preload, itemListName, layout }: Props) {
   return (
     <div
       id={id}
-      class={`card card-compact group w-full ${
+      class={`w-[160px] sm:w-[240px] bg-white rounded-md card card-compact group ${
         align === "center" ? "text-center" : "text-start"
       } ${l?.onMouseOver?.showCardShadow ? "lg:hover:card-bordered" : ""}
         ${
@@ -219,7 +219,7 @@ function ProductCard({ product, preload, itemListName, layout }: Props) {
           <>
             {l?.hide?.skuSelector ? "" : (
               <ul
-                class={`flex items-center gap-2 w-full ${
+                class={`flex items-center gap-2 w-full min-h-8 ${
                   align === "center" ? "justify-center" : "justify-start"
                 } ${l?.onMouseOver?.showSkuSelector ? "lg:hidden" : ""}`}
               >
@@ -279,7 +279,7 @@ function ProductCard({ product, preload, itemListName, layout }: Props) {
           <>
             {l?.hide?.skuSelector ? "" : (
               <ul
-                class={`flex items-center gap-2 w-full ${
+                class={`flex items-center gap-2 w-full min-h-8 ${
                   align === "center" ? "justify-center" : "justify-start"
                 } ${l?.onMouseOver?.showSkuSelector ? "lg:hidden" : ""}`}
               >

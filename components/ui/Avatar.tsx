@@ -37,7 +37,7 @@ function Avatar({ content, variant = "default" }: Props) {
   return (
     <div class="avatar placeholder text-xs">
       <div
-        class={`rounded-full w-6 md:w-8 ${colors[content] ?? colors[variant]} ${
+        class={`rounded-full w-6 md:w-7 lg:w-8 ${colors[content] ?? colors[variant]} ${
           variants[variant]
         }`}
       >
