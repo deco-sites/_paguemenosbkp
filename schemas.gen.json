@@ -103,6 +103,7 @@
               "deco-sites/paguemenos/sections/Category/CategoryBanner.tsx",
               "deco-sites/paguemenos/sections/Category/CategoryList.tsx",
               "deco-sites/paguemenos/sections/Category/DepartmentList.tsx",
+              "deco-sites/paguemenos/sections/Contact/Contact.tsx",
               "deco-sites/paguemenos/sections/Content/Benefits.tsx",
               "deco-sites/paguemenos/sections/Content/Faq.tsx",
               "deco-sites/paguemenos/sections/Content/Logos.tsx",
@@ -10778,6 +10779,174 @@
       "required": [],
       "title": "deco-sites/paguemenos/sections/Category/DepartmentList.tsx@Props"
     },
+    "ZGVjby1zaXRlcy9wYWd1ZW1lbm9zL2NvbXBvbmVudHMvdWkvQ29udGFjdC50c3g=@Props": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "title": {
+                "type": "string",
+                "title": "Title"
+              },
+              "description": {
+                "type": "string",
+                "title": "Description"
+              },
+              "link": {
+                "type": "string",
+                "title": "Link"
+              }
+            },
+            "required": [
+              "title",
+              "description",
+              "link"
+            ]
+          },
+          "title": "Items"
+        },
+        "IconImage": {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Image",
+          "title": " Icon Image"
+        },
+        "layout": {
+          "type": "object",
+          "properties": {
+            "headerFontSize": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "const": "Large",
+                  "default": "Large"
+                },
+                {
+                  "type": "string",
+                  "const": "Normal",
+                  "default": "Normal"
+                }
+              ],
+              "type": "string",
+              "title": "Header Font Size"
+            },
+            "content": {
+              "type": "object",
+              "properties": {
+                "borderRadius": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "const": "none",
+                      "default": "none"
+                    },
+                    {
+                      "type": "string",
+                      "const": "sm",
+                      "default": "sm"
+                    },
+                    {
+                      "type": "string",
+                      "const": "md",
+                      "default": "md"
+                    },
+                    {
+                      "type": "string",
+                      "const": "lg",
+                      "default": "lg"
+                    },
+                    {
+                      "type": "string",
+                      "const": "xl",
+                      "default": "xl"
+                    },
+                    {
+                      "type": "string",
+                      "const": "2xl",
+                      "default": "2xl"
+                    },
+                    {
+                      "type": "string",
+                      "const": "3xl",
+                      "default": "3xl"
+                    },
+                    {
+                      "type": "string",
+                      "const": "full",
+                      "default": "full"
+                    }
+                  ],
+                  "type": "string",
+                  "title": "Border Radius"
+                },
+                "alignmentImage": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "const": "Right",
+                      "default": "Right"
+                    },
+                    {
+                      "type": "string",
+                      "const": "Left",
+                      "default": "Left"
+                    }
+                  ],
+                  "type": "string",
+                  "title": "Alignment Image"
+                },
+                "orientation": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "const": "Row",
+                      "default": "Row"
+                    },
+                    {
+                      "type": "string",
+                      "const": "Column",
+                      "default": "Column"
+                    },
+                    {
+                      "type": "string",
+                      "const": "Row/Column",
+                      "default": "Row/Column"
+                    }
+                  ],
+                  "type": "string",
+                  "title": "Orientation"
+                },
+                "bgColor": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "const": "Normal",
+                      "default": "Normal"
+                    },
+                    {
+                      "type": "string",
+                      "const": "Reverse",
+                      "default": "Reverse"
+                    }
+                  ],
+                  "type": "string",
+                  "title": "Bg Color"
+                }
+              },
+              "required": [
+                "borderRadius"
+              ],
+              "title": "Content"
+            }
+          },
+          "required": [],
+          "title": "Layout"
+        }
+      },
+      "required": [],
+      "title": "deco-sites/paguemenos/components/ui/Contact.tsx@Props"
+    },
     "ZGVjby1zaXRlcy9wYWd1ZW1lbm9zL3NlY3Rpb25zL0NvbnRlbnQvQmVuZWZpdHMudHN4@Props": {
       "type": "object",
       "properties": {
@@ -10860,6 +11029,11 @@
                     "type": "string",
                     "const": "Discount",
                     "default": "Discount"
+                  },
+                  {
+                    "type": "string",
+                    "const": "download",
+                    "default": "download"
                   },
                   {
                     "type": "string",
@@ -10948,6 +11122,11 @@
                   },
                   {
                     "type": "string",
+                    "const": "ReclameAqui",
+                    "default": "ReclameAqui"
+                  },
+                  {
+                    "type": "string",
                     "const": "ShoppingCart",
                     "default": "ShoppingCart"
                   },
@@ -11018,13 +11197,13 @@
                   },
                   {
                     "type": "string",
-                    "const": "download",
-                    "default": "download"
+                    "const": "pharmacy",
+                    "default": "pharmacy"
                   },
                   {
                     "type": "string",
-                    "const": "pharmacy",
-                    "default": "pharmacy"
+                    "const": "Youtube",
+                    "default": "Youtube"
                   },
                   {
                     "type": "string",
@@ -11577,6 +11756,11 @@
             },
             {
               "type": "string",
+              "const": "Youtube",
+              "default": "Youtube"
+            },
+            {
+              "type": "string",
               "const": "Twitter",
               "default": "Twitter"
             }
@@ -11601,6 +11785,33 @@
         "$ref": "#/definitions/ZGVjby1zaXRlcy9wYWd1ZW1lbm9zL2NvbXBvbmVudHMvZm9vdGVyL0Zvb3Rlci50c3g=@SocialItem"
       },
       "title": "SocialItem[]"
+    },
+    "ZGVjby1zaXRlcy9wYWd1ZW1lbm9zL2NvbXBvbmVudHMvZm9vdGVyL0Zvb3Rlci50c3g=@CertifiedItem": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string",
+          "const": "ReclameAqui",
+          "default": "ReclameAqui",
+          "title": "Label"
+        },
+        "link": {
+          "type": "string",
+          "title": "Link"
+        }
+      },
+      "required": [
+        "label",
+        "link"
+      ],
+      "title": "CertifiedItem"
+    },
+    "ZGVjby1zaXRlcy9wYWd1ZW1lbm9zL2NvbXBvbmVudHMvZm9vdGVyL0Zvb3Rlci50c3g=@CertifiedItem[]": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ZGVjby1zaXRlcy9wYWd1ZW1lbm9zL2NvbXBvbmVudHMvZm9vdGVyL0Zvb3Rlci50c3g=@CertifiedItem"
+      },
+      "title": "CertifiedItem[]"
     },
     "ZGVjby1zaXRlcy9wYWd1ZW1lbm9zL2NvbXBvbmVudHMvZm9vdGVyL0Zvb3Rlci50c3g=@PaymentItem": {
       "type": "object",
@@ -11724,6 +11935,11 @@
             },
             {
               "type": "string",
+              "const": "Base 100 Title Blue",
+              "default": "Base 100 Title Blue"
+            },
+            {
+              "type": "string",
               "const": "Base 100 inverted",
               "default": "Base 100 inverted"
             }
@@ -11757,6 +11973,11 @@
               "type": "string",
               "const": "Variation 5",
               "default": "Variation 5"
+            },
+            {
+              "type": "string",
+              "const": "Variation 6",
+              "default": "Variation 6"
             }
           ],
           "type": "string",
@@ -11792,6 +12013,13 @@
                 "null"
               ],
               "title": "Social Links"
+            },
+            "certified": {
+              "type": [
+                "boolean",
+                "null"
+              ],
+              "title": "Certified"
             },
             "paymentMethods": {
               "type": [
@@ -11907,6 +12135,26 @@
             "items"
           ],
           "title": "Social"
+        },
+        "certified": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "title": "Title"
+            },
+            "items": {
+              "$ref": "#/definitions/ZGVjby1zaXRlcy9wYWd1ZW1lbm9zL2NvbXBvbmVudHMvZm9vdGVyL0Zvb3Rlci50c3g=@CertifiedItem[]",
+              "title": "Items"
+            }
+          },
+          "required": [
+            "items"
+          ],
+          "title": "Certified"
         },
         "payments": {
           "type": "object",
@@ -12201,21 +12449,22 @@
           "$ref": "#/definitions/ZGVjby1zaXRlcy9wYWd1ZW1lbm9zL2NvbXBvbmVudHMvdWkvQmFubmVyQ2F0YWxvZ0Nhcm91c2VsLnRzeA==@Banner[]",
           "title": "Images"
         },
+        "preload": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "title": "Preload"
+        },
         "interval": {
           "type": [
             "number",
             "null"
           ],
-          "description": "Check this option when this banner is the biggest image on the screen for image optimizations",
           "title": "Interval"
         },
         "itemsPerLine": {
           "anyOf": [
-            {
-              "type": "number",
-              "const": 1,
-              "default": 1
-            },
             {
               "type": "number",
               "const": 2,
@@ -12362,6 +12611,7 @@
       },
       "required": [
         "srcMobile",
+        "srcDesktop",
         "alt",
         "href"
       ],
@@ -12378,12 +12628,33 @@
     "ZGVjby1zaXRlcy9wYWd1ZW1lbm9zL2NvbXBvbmVudHMvdWkvQmFubmVyR3JpZC50c3g=@Props": {
       "type": "object",
       "properties": {
-        "title": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "title": "Title"
+        "header": {
+          "type": "object",
+          "properties": {
+            "titleTop": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "title": "Title Top"
+            },
+            "titleBottom": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "title": "Title Bottom"
+            },
+            "description": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "title": "Description"
+            }
+          },
+          "required": [],
+          "title": "Header"
         },
         "itemsPerLine": {
           "type": "object",
@@ -12584,6 +12855,13 @@
           ],
           "type": "boolean",
           "title": "Is Main Banner"
+        },
+        "preload": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "title": "Preload"
         }
       },
       "required": [
@@ -13205,6 +13483,11 @@
             },
             {
               "type": "string",
+              "const": "download",
+              "default": "download"
+            },
+            {
+              "type": "string",
               "const": "Elo",
               "default": "Elo"
             },
@@ -13290,6 +13573,11 @@
             },
             {
               "type": "string",
+              "const": "ReclameAqui",
+              "default": "ReclameAqui"
+            },
+            {
+              "type": "string",
               "const": "ShoppingCart",
               "default": "ShoppingCart"
             },
@@ -13360,13 +13648,13 @@
             },
             {
               "type": "string",
-              "const": "download",
-              "default": "download"
+              "const": "pharmacy",
+              "default": "pharmacy"
             },
             {
               "type": "string",
-              "const": "pharmacy",
-              "default": "pharmacy"
+              "const": "Youtube",
+              "default": "Youtube"
             },
             {
               "type": "string",
@@ -17928,6 +18216,27 @@
         }
       }
     },
+    "ZGVjby1zaXRlcy9wYWd1ZW1lbm9zL3NlY3Rpb25zL0NvbnRhY3QvQ29udGFjdC50c3g=": {
+      "title": "deco-sites/paguemenos/sections/Contact/Contact.tsx",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9wYWd1ZW1lbm9zL2NvbXBvbmVudHMvdWkvQ29udGFjdC50c3g=@Props"
+        }
+      ],
+      "required": [
+        "__resolveType"
+      ],
+      "properties": {
+        "__resolveType": {
+          "type": "string",
+          "enum": [
+            "deco-sites/paguemenos/sections/Contact/Contact.tsx"
+          ],
+          "default": "deco-sites/paguemenos/sections/Contact/Contact.tsx"
+        }
+      }
+    },
     "ZGVjby1zaXRlcy9wYWd1ZW1lbm9zL3NlY3Rpb25zL0NvbnRlbnQvQmVuZWZpdHMudHN4": {
       "title": "deco-sites/paguemenos/sections/Content/Benefits.tsx",
       "type": "object",
@@ -19813,6 +20122,9 @@
         },
         {
           "$ref": "#/definitions/ZGVjby1zaXRlcy9wYWd1ZW1lbm9zL3NlY3Rpb25zL0NhdGVnb3J5L0RlcGFydG1lbnRMaXN0LnRzeA=="
+        },
+        {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9wYWd1ZW1lbm9zL3NlY3Rpb25zL0NvbnRhY3QvQ29udGFjdC50c3g="
         },
         {
           "$ref": "#/definitions/ZGVjby1zaXRlcy9wYWd1ZW1lbm9zL3NlY3Rpb25zL0NvbnRlbnQvQmVuZWZpdHMudHN4"

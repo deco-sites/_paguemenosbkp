@@ -4,13 +4,15 @@ export interface Layout {
     | "Secondary"
     | "Accent"
     | "Base 100"
+    | "Base 100 Title Blue"
     | "Base 100 inverted";
   variation?:
     | "Variation 1"
     | "Variation 2"
     | "Variation 3"
     | "Variation 4"
-    | "Variation 5";
+    | "Variation 5"
+    | "Variation 6";
   hide?: {
     logo?: boolean;
     newsletter?: boolean;
@@ -33,6 +35,8 @@ export default function colorClasses(layout: Layout) {
     case "Accent":
       return "bg-accent text-accent-content";
     case "Base 100":
+      return "bg-base-100 text-base-content";
+    case "Base 100 Title Blue":
       return "bg-base-100 text-base-content";
     case "Base 100 inverted":
       return "bg-base-content text-base-100";

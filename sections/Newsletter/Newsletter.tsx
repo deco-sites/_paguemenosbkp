@@ -56,21 +56,23 @@ export default function Newsletter(props: Props) {
   );
 
   const formLayout = form && (
-    <form action="/" class="flex flex-col gap-4">
+    <form action="/" class="flex flex-col gap-4 w-full">
       <div
         class={`flex ${
           layout?.content?.alignment === "Side to side"
-            ? "flex-col md:flex-row"
+            ? "flex-col md:flex-row w-full"
             : "flex-col gap-3"
         }`}
       >
         <input
-          class="input input-bordered lg:w-80"
+          class="input input-bordered w-full bg-[rgba(0,125,197,0.8)] text-white"
           type="text"
           placeholder={form.placeholder}
         />
         <button
-          class={`btn ${isReverse ? "btn-accent" : ""}`}
+          class={`btn bg-[#ffb100] text-[rgba(0,125,197,0.8)] ${
+            isReverse ? "btn-accent" : ""
+          }`}
           type="submit"
         >
           {form.buttonText}
@@ -95,14 +97,14 @@ export default function Newsletter(props: Props) {
         bordered
           ? isReverse ? "bg-secondary-content" : "bg-secondary"
           : bgLayout
-      } ${bordered ? "p-4 lg:p-16" : "p-0"}`}
+      } ${bordered ? "p-4 lg:p-8" : "p-0"}`}
     >
       {(!layout?.content?.alignment ||
         layout?.content?.alignment === "Center") && (
         <div
           class={`container ${
             !isReverse ? "text-white" : ""
-          } flex flex-col rounded p-4 gap-6 lg:p-16 lg:gap-12 ${bgLayout}`}
+          } flex flex-col rounded p-4 gap-6 lg:p-8 lg:gap-12 ${bgLayout}`}
         >
           {headerLayout}
           <div class="flex justify-center">
@@ -124,12 +126,12 @@ export default function Newsletter(props: Props) {
       )}
       {layout?.content?.alignment === "Side to side" && (
         <div
-          class={`container items-center flex-col md:flex-row ${
+          class={`container items-center flex-col ${
             !isReverse ? "text-white" : ""
-          } flex rounded justify-between lg:flex-row p-4 gap-6 lg:p-16 lg:gap-12 ${bgLayout}`}
+          } flex rounded justify-between lg:flex-row p-4 gap-2 lg:p-5 ${bgLayout}`}
         >
           {headerLayout}
-          <div class="flex justify-center">
+          <div class="flex justify-center w-full lg:w-[550px]">
             {formLayout}
           </div>
         </div>

@@ -53,22 +53,22 @@ function BannerItem({ image, lcp }: { image: Banner; lcp?: boolean }) {
     <a
       href={action?.href ?? "#"}
       aria-label={action?.label}
-      class="relative h-40 lg:h-60 overflow-y-hidden w-full"
+      class="relative h-max w-full p-[1px] sm:p-0"
     >
       <Picture preload={lcp}>
         <Source
           media="(max-width: 767px)"
           fetchPriority={lcp ? "high" : "auto"}
           src={mobile}
-          width={360}
-          height={160}
+          width={192} // 640 320 160 + 32 192
+          height={84} // 280 140 70 + 14 84
         />
         <Source
           media="(min-width: 768px)"
           fetchPriority={lcp ? "high" : "auto"}
           src={desktop}
-          width={1240}
-          height={240}
+          width={620}
+          height={135}
         />
         <img
           class="object-cover w-full h-full"
@@ -108,13 +108,13 @@ function Dots({ images, interval = 0 }: Props) {
           `,
         }}
       />
-      <ul class="carousel justify-center col-span-full gap-4 z-10 row-start-4">
+      <ul class="carousel justify-center col-span-full gap-1 z-10 row-start-4">
         {images?.map((_, index) => (
           <li class="carousel-item">
             <Slider.Dot index={index}>
-              <div class="py-5">
+              <div class="py-1 sm:py-6">
                 <div
-                  class="w-16 sm:w-20 h-0.5 rounded group-disabled:animate-progress bg-gradient-to-r from-base-100 from-[length:var(--dot-progress)] to-[rgba(255,255,255,0.4)] to-[length:var(--dot-progress)]"
+                  class="w-2 rounded group-disabled:animate-progress group-disabled:bg-[#0054A6] group-disabled:w-4 h-2 bg-[#bbb] bg-gradient-to-r from-base-100 from-[length:var(--dot-progress)] to-[rgba(255,255,255,0.4)] to-[length:var(--dot-progress)]"
                   style={{ animationDuration: `${interval}s` }}
                 />
               </div>
@@ -129,7 +129,7 @@ function Dots({ images, interval = 0 }: Props) {
 function Buttons() {
   return (
     <>
-      <div class="z-10 col-start-1 row-start-2">
+      <div class="hidden sm:block z-10 col-start-1 row-start-2">
         <Slider.PrevButton class="btn z-50 rounded-full w-10 h-10 min-h-min md:w-12 md:h-12 md:min-h-min xl:min-h-min xl:btn-lg btn-circle bg-white border border[#0054A6] divide-solid">
           <Icon
             class="text-[#0054A6] bg-white"
@@ -139,7 +139,7 @@ function Buttons() {
           />
         </Slider.PrevButton>
       </div>
-      <div class="z-10 col-start-3 row-start-2">
+      <div class="hidden sm:block z-10 col-start-3 row-start-2">
         <Slider.NextButton class="btn z-50 rounded-full w-10 h-10 min-h-min md:w-12 md:h-12 md:min-h-min xl:min-h-min xl:btn-lg btn-circle bg-white border border[#0054A6] divide-solid">
           <Icon
             class="text-[#0054A6] bg-white"
@@ -159,7 +159,7 @@ function BannerCarousel({ images, preload, interval }: Props) {
   return (
     <div
       id={id}
-      class="grid grid-cols-[48px_1fr_48px] sm:grid-cols-[60px_1fr_60px] grid-rows-[100px_1fr_75px]"
+      class="grid grid-cols-[48px_1fr_48px] sm:grid-cols-[60px_1fr_60px] grid-rows-[5fr_5fr_1fr]"
     >
       <Slider class="carousel carousel-center w-full col-span-full row-span-full scrollbar-none gap-6">
         {images?.map((image, index) => (

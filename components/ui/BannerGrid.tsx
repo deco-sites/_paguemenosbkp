@@ -1,12 +1,13 @@
 import { Picture, Source } from "deco-sites/std/components/Picture.tsx";
 import type { Image as LiveImage } from "deco-sites/std/components/types.ts";
+import HeaderSections from "$store/components/ui/SectionHeader2.tsx";
 
 /**
  * @titleBy alt
  */
 export interface Banner {
   srcMobile: LiveImage;
-  srcDesktop?: LiveImage;
+  srcDesktop: LiveImage;
   /**
    * @description Image alt text
    */
@@ -28,7 +29,11 @@ export type BorderRadius =
   | "full";
 
 export interface Props {
-  title?: string;
+  header?: {
+    titleTop?: string;
+    titleBottom?: string;
+    description?: string;
+  };
   /**
    * @description Default is 2 for mobile and all for desktop
    */
@@ -93,7 +98,7 @@ const RADIUS_DESKTOP = {
 };
 
 export default function BannerGrid({
-  title,
+  header,
   itemsPerLine,
   borderRadius,
   banners = [],
@@ -101,17 +106,13 @@ export default function BannerGrid({
   preload,
 }: Props) {
   return (
-    <section class="container w-full px-4 pt-6 pb-2 md:px-0 mx-auto">
-      {title &&
-        (
-          <div class="py-6 md:py-0 md:pb-[40px] flex items-center mt-6">
-            <h2 class="text-lg leading-5 font-semibold uppercase">
-              {title}
-            </h2>
-
-            <div class="bg-[#e5e5ea] h-[1px] w-full ml-4"></div>
-          </div>
-        )}
+    <section class="container w-full px-4 pt-6 pb-2 md:px-0 mx-auto overflow-x-auto md:overflow-visible">
+      <HeaderSections
+        titleTop={header?.titleTop}
+        titleBottom={header?.titleBottom}
+        description={header?.description || ""}
+        alignment={"left"}
+      />
       <div
         style={isMainBanner
           ? {
@@ -123,14 +124,18 @@ export default function BannerGrid({
             gridTemplateColumns: `repeat(${itemsPerLine
               ?.desktop as number}, 1fr)`,
           }}
-        class={`${!itemsPerLine?.mobile && "hidden"} md:grid gap-0 md:gap-2 ${
+        class={`${
+          !itemsPerLine?.mobile && "hidden"
+        } mt-4 flex md:grid min-w-fit w-[${
+          banners.length * 186
+        }px] md:w-auto gap-0 md:gap-2 ${
           MOBILE_COLUMNS[itemsPerLine?.mobile ?? 2]
         } ${DESKTOP_COLUMNS[itemsPerLine?.desktop ?? 4]}`}
       >
         {banners.map(({ href, srcMobile, srcDesktop, alt }, index) => (
           <a
             href={href}
-            class={`overflow-hidden ${
+            class={`overflow-hidden w-full first:mr-2 last:ml-2 ${
               RADIUS_MOBILE[borderRadius.mobile ?? "none"]
             } ${RADIUS_DESKTOP[borderRadius.desktop ?? "none"]} `}
           >
@@ -138,14 +143,26 @@ export default function BannerGrid({
               <Source
                 media="(max-width: 767px)"
                 src={srcMobile}
-                width={index === 0 && isMainBanner ? 470 : 200}
-                height={300}
+                width={isMainBanner
+                  ? (
+                    index === 0 ? 100 : 140
+                  )
+                  : (
+                    93
+                  )}
+                height={isMainBanner ? 200 : 110}
               />
               <Source
                 media="(min-width: 768px)"
-                src={srcDesktop ? srcDesktop : srcMobile}
-                width={index === 0 && isMainBanner ? 630 : 315}
-                height={450}
+                src={srcDesktop}
+                width={isMainBanner
+                  ? (
+                    index === 0 ? 210 : 104
+                  )
+                  : (
+                    201
+                  )}
+                height={isMainBanner ? 150 : 110}
               />
               <img
                 class="w-full"

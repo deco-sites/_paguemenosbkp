@@ -2,6 +2,7 @@ import Logo from "$store/components/footer/Logo.tsx";
 import Newsletter from "$store/islands/Newsletter.tsx";
 import FooterItems from "$store/components/footer/FooterItems.tsx";
 import Social from "$store/components/footer/Social.tsx";
+import Certified from "$store/components/footer/Certified.tsx";
 import PaymentMethods from "$store/components/footer/PaymentMethods.tsx";
 import MobileApps from "$store/components/footer/MobileApps.tsx";
 import ExtraLinks from "$store/components/footer/ExtraLinks.tsx";
@@ -29,6 +30,7 @@ export interface SocialItem {
     | "Instagram"
     | "Linkedin"
     | "Tiktok"
+    | "Youtube"
     | "Twitter";
   link: string;
 }
@@ -56,6 +58,11 @@ export interface RegionOptions {
   language?: Item[];
 }
 
+export interface CertifiedItem {
+  label: "ReclameAqui";
+  link: string;
+}
+
 export interface NewsletterForm {
   placeholder?: string;
   buttonText?: string;
@@ -69,18 +76,21 @@ export interface Layout {
     | "Secondary"
     | "Accent"
     | "Base 100"
+    | "Base 100 Title Blue"
     | "Base 100 inverted";
   variation?:
     | "Variation 1"
     | "Variation 2"
     | "Variation 3"
     | "Variation 4"
-    | "Variation 5";
+    | "Variation 5"
+    | "Variation 6";
   hide?: {
     logo?: boolean;
     newsletter?: boolean;
     sectionLinks?: boolean;
     socialLinks?: boolean;
+    certified?: boolean;
     paymentMethods?: boolean;
     mobileApps?: boolean;
     regionOptions?: boolean;
@@ -104,6 +114,10 @@ export interface Props {
   social?: {
     title?: string;
     items: SocialItem[];
+  };
+  certified?: {
+    title?: string;
+    items: CertifiedItem[];
   };
   payments?: {
     title?: string;
@@ -166,6 +180,10 @@ function Footer({
     title: "Formas de pagamento",
     items: [{ label: "Mastercard" }, { label: "Visa" }, { label: "Pix" }],
   },
+  certified = {
+    title: "Nossos selos",
+    items: [{ label: "ReclameAqui", link: "" }],
+  },
   mobileApps = { apple: "/", android: "/" },
   regionOptions = { currency: [], language: [] },
   extraLinks = [],
@@ -178,6 +196,7 @@ function Footer({
       newsletter: false,
       sectionLinks: false,
       socialLinks: false,
+      certified: false,
       paymentMethods: false,
       mobileApps: false,
       regionOptions: false,
@@ -199,6 +218,12 @@ function Footer({
       sections={sections}
       justify={layout?.variation == "Variation 2" ||
         layout?.variation == "Variation 3"}
+    />
+  );
+  const _certified = layout?.hide?.certified ? <></> : (
+    <Certified
+      content={certified}
+      vertical={layout?.variation == "Variation 3"}
     />
   );
   const _social = layout?.hide?.socialLinks
@@ -244,6 +269,7 @@ function Footer({
             <div class="flex flex-col-reverse md:flex-row md:justify-between gap-10">
               <PoweredByDeco />
               {_links}
+              {_certified}
             </div>
           </div>
         )}
@@ -256,6 +282,7 @@ function Footer({
                 {_payments}
                 {_apps}
                 {_region}
+                {_certified}
               </div>
               <div class="flex flex-col gap-10 lg:gap-20 lg:w-1/2 lg:pr-10">
                 {_newsletter}
@@ -291,6 +318,7 @@ function Footer({
             <Divider />
             <div class="flex flex-col-reverse md:flex-row md:justify-between gap-10">
               <PoweredByDeco />
+              {_certified}
               {_links}
             </div>
           </div>
@@ -313,6 +341,7 @@ function Footer({
                 <div class="flex flex-col gap-10 lg:gap-10">
                   {_region}
                   {_apps}
+                  {_certified}
                 </div>
               </div>
             </div>
@@ -342,7 +371,32 @@ function Footer({
               <div class="flex flex-col md:flex-row gap-10 md:items-center">
                 {_links}
                 {_region}
+                {_certified}
               </div>
+            </div>
+          </div>
+        )}
+        {layout?.variation == "Variation 6" && (
+          <div class="flex flex-col gap-10">
+            {_newsletter}
+            {layout?.hide?.newsletter ? <></> : <Divider />}
+            {_logo}
+            <div class="flex flex-col md:flex-row gap-10 lg:gap-20 md:justify-between">
+              {_sectionLinks}
+              <div class="flex flex-col gap-10 md:w-2/5 lg:pl-10">
+                {_apps}
+                {_certified}
+              </div>
+            </div>
+            <Divider />
+            <div class="flex flex-col md:flex-row gap-10 md:items-center justify-around">
+              {_links}
+              {_region}
+            </div>
+            <div class="flex flex-col-reverse md:flex-row md:justify-between gap-10 items-center">
+              <PoweredByDeco />
+              {_payments}
+              {_social}
             </div>
           </div>
         )}

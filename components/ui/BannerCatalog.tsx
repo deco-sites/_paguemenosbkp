@@ -101,7 +101,7 @@ export default function BannerCatalog({
 }: Props) {
   return (
     <section
-      class={`container w-full md:px-0 ${
+      class={`container w-full h-max md:px-0 ${
         itemsPerLine === 1 && "max-w-[100%]"
       } mx-auto`}
     >
@@ -116,7 +116,7 @@ export default function BannerCatalog({
           </div>
         )}
       <div
-        class={`grid gap-4 md:gap-6 ${
+        class={`grid gap-2 md:gap-4 ${
           MOBILE_COLUMNS[itemsPerLine]
         } md:grid-rows-none ${DESKTOP_COLUMNS[itemsPerLine]}`}
       >
@@ -132,14 +132,14 @@ export default function BannerCatalog({
                 <Source
                   media="(max-width: 767px)"
                   src={mobile}
-                  width={360}
-                  height={100}
+                  width={252}
+                  height={70}
                 />
                 <Source
                   media="(min-width: 768px)"
                   src={desktop ? desktop : mobile}
-                  width={360}
-                  height={100}
+                  width={252}
+                  height={70}
                 />
                 <img
                   class="w-full"

@@ -38,7 +38,7 @@ function ProductShelf({
   }
 
   return (
-    <div class="w-full container py-8 flex flex-col gap-4 lg:gap-6 lg:py-10">
+    <div class="w-full container py-8 px-4 md:px-0 flex flex-col gap-4 lg:gap-6 lg:py-10">
       <HeaderSections
         titleTop={titleTop}
         titleBottom={titleBottom}
@@ -48,7 +48,7 @@ function ProductShelf({
 
       <div
         id={id}
-        class="xl:max-w-screen-2xl grid grid-cols-[35px_1fr_35px] px-0 sm:px-5"
+        class="xl:max-w-screen-2xl grid grid-cols-[35px_1fr_35px]"
       >
         <Slider class="carousel carousel-center sm:carousel-end gap-2 col-span-full row-start-1 row-end-7 p-2">
           {products?.map((product, index) => (

@@ -23,6 +23,16 @@ export interface Banner {
   };
 }
 
+const GRID_ROWS_MOBILE = {
+  2: "grid-rows-[4fr_1fr_4fr]",
+  3: "grid-rows-[5fr_1fr_5fr]",
+};
+
+const GRID_ROWS_DESKTOP = {
+  2: "xl:grid-rows-[60px_1fr_60px] lg:grid-rows-[50px_1fr_50px] md:grid-rows-[35px_1fr_35px]",
+  3: "xl:grid-rows-[25px_1fr_25px] lg:grid-rows-[20px_1fr_20px] md:grid-rows-[15px_1fr_15px]",
+};
+
 export type BorderRadius =
   | "none"
   | "sm"
@@ -45,7 +55,7 @@ export interface Props {
   images: Banner[];
   preload?: boolean;
   interval?: number;
-  itemsPerLine: 1 | 2 | 3;
+  itemsPerLine: 2 | 3;
   /**
    * @description Item's border radius in px
    */
@@ -63,11 +73,6 @@ function groupBanners(images: Banner[], itemsPerLine: number) {
   const itemsPerLineParam = itemsPerLine;
   for (let index = 0; index < images?.length; index += itemsPerLineParam) {
     switch (itemsPerLineParam) {
-      case 1:
-        groupBannerList = [...groupBannerList, [
-          images[index],
-        ]];
-        break;
       case 2:
         groupBannerList = [...groupBannerList, [
           images[index],
@@ -125,7 +130,7 @@ function Dots({ images, interval = 0 }: CarrouselProps) {
 function Buttons() {
   return (
     <>
-      <div class="z-10 relative col-start-1 row-start-4">
+      <div class="hidden md:block z-10 col-start-1 row-start-2">
         <Slider.PrevButton class="btn z-50 rounded-full w-10 h-10 min-h-min md:min-h-min xl:min-h-min md:w-12 md:h-12 xl:btn-lg btn-circle bg-white border border[#0054A6] divide-solid">
           <Icon
             class="text-[#0054A6] bg-white"
@@ -135,7 +140,7 @@ function Buttons() {
           />
         </Slider.PrevButton>
       </div>
-      <div class="z-10 relative col-start-3 row-start-4">
+      <div class="hidden md:block z-10 col-start-3 row-start-2">
         <Slider.NextButton class="btn z-50 rounded-full w-10 h-10 min-h-min md:min-h-min xl:min-h-min md:w-12 md:h-12 xl:btn-lg btn-circle bg-white border border[#0054A6] divide-solid">
           <Icon
             class="text-[#0054A6] bg-white"
@@ -158,11 +163,13 @@ function BannerCatalogCarousel(
     <section className="py-10">
       <div
         id={id}
-        className="relative grid w-full grid-cols-[42px_1fr_42px] md:grid-cols-[45px_1fr_47px]"
+        className={`px-2 h-max relative grid w-full grid-cols-[42px_1fr_42px] md:grid-cols-[45px_1fr_47px] ${
+          GRID_ROWS_DESKTOP[itemsPerLine]
+        } ${GRID_ROWS_MOBILE[itemsPerLine]}`}
       >
-        <Slider class="carousel carousel-center w-full scrollbar-none gap-6 row-start-1 row-end-7">
+        <Slider class="carousel carousel-center w-full scrollbar-none gap-6 col-span-full row-span-full h-max">
           {groupBannerList.map((groupBanner: Banner[], index: number) => (
-            <Slider.Item index={index} class="carousel-item w-full">
+            <Slider.Item index={index} class="carousel-item w-full h-max">
               <BannerCatalog
                 banners={groupBanner}
                 borderRadius={borderRadius}

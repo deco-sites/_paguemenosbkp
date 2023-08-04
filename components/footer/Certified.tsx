@@ -1,20 +1,13 @@
-import Icon, { AvailableIcons } from "$store/components/ui/Icon.tsx";
+import Icon from "$store/components/ui/Icon.tsx";
 
-export interface SocialItem {
-  label:
-    | "Discord"
-    | "Facebook"
-    | "Instagram"
-    | "Linkedin"
-    | "Tiktok"
-    | "Youtube"
-    | "Twitter";
+export interface CertifiedItem {
+  label: "ReclameAqui";
   link: string;
 }
 
-export default function Social(
+export default function Certified(
   { content, vertical = false }: {
-    content?: { title?: string; items?: SocialItem[] };
+    content?: { title?: string; items?: CertifiedItem[] };
     vertical?: boolean;
   },
 ) {
@@ -25,7 +18,9 @@ export default function Social(
           {content.title && <h3 class="text-lg">{content.title}</h3>}
           <ul
             class={`flex gap-4 ${
-              vertical ? "lg:flex-col lg:items-start" : "flex-wrap items-center"
+              vertical
+                ? "lg:flex-col items-start justify-center"
+                : "flex-wrap items-center justify-center"
             }`}
           >
             {content.items.map((item) => {
@@ -40,8 +35,8 @@ export default function Social(
                   >
                     <span class="block p-1 border rounded-full">
                       <Icon
-                        width={20}
-                        height={20}
+                        width={110}
+                        height={50}
                         id={item.label}
                       />
                     </span>

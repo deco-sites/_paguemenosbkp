@@ -105,7 +105,7 @@ export default function Benefits(
               description={description}
               alignment={layout?.headerAlignment || "center"}
             />
-            <div class="w-full flex justify-center overflow-x-auto max-w-[100%] lg:overflow-x-visible">
+            <div class="w-full flex justify-center pb-4 overflow-x-auto max-w-[100%] lg:overflow-x-visible">
               <div
                 class={`flex gap-4 w-full lg:grid grid-flow-col auto-cols-fr ${
                   layout?.orientation === "Horizontal"

@@ -42,6 +42,7 @@ import * as $$$$$$$$22 from "./sections/Content/Faq.tsx";
 import * as $$$$$$$$23 from "./sections/Content/Logos.tsx";
 import * as $$$$$$$$24 from "./sections/Footer/Footer.tsx";
 import * as $$$$$$$$25 from "./sections/Newsletter/Newsletter.tsx";
+import * as $$$$$$$$26 from "./sections/Contact/Contact.tsx";
 import * as $live_workflows from "$live/routes/live/workflows/run.ts";
 import * as $live_middleware from "$live/routes/_middleware.ts";
 import * as $live_workbench from "$live/routes/live/workbench.ts";
@@ -223,6 +224,7 @@ const manifest = {
     "deco-sites/paguemenos/sections/Category/CategoryBanner.tsx": $$$$$$$$17,
     "deco-sites/paguemenos/sections/Category/CategoryList.tsx": $$$$$$$$16,
     "deco-sites/paguemenos/sections/Category/DepartmentList.tsx": $$$$$$$$18,
+    "deco-sites/paguemenos/sections/Contact/Contact.tsx": $$$$$$$$26,
     "deco-sites/paguemenos/sections/Content/Benefits.tsx": $$$$$$$$21,
     "deco-sites/paguemenos/sections/Content/Faq.tsx": $$$$$$$$22,
     "deco-sites/paguemenos/sections/Content/Logos.tsx": $$$$$$$$23,
