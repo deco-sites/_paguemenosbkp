@@ -145,12 +145,12 @@ export default function BannerGrid({
                 src={srcMobile}
                 width={isMainBanner
                   ? (
-                    index === 0 ? 100 : 140
+                    index === 0 ? 90 : 126
                   )
                   : (
-                    93
+                    84
                   )}
-                height={isMainBanner ? 200 : 110}
+                height={isMainBanner ? 180 : 99}
               />
               <Source
                 media="(min-width: 768px)"

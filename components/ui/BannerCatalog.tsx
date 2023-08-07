@@ -132,8 +132,8 @@ export default function BannerCatalog({
                 <Source
                   media="(max-width: 767px)"
                   src={mobile}
-                  width={252}
-                  height={70}
+                  width={126}
+                  height={35}
                 />
                 <Source
                   media="(min-width: 768px)"

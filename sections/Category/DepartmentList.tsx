@@ -151,8 +151,8 @@ function DeparmentList(props: Props) {
                         class="w-full"
                         src={image}
                         alt={description || label || tag}
-                        width={190}
-                        height={label ? 124 : 155}
+                        width={171}
+                        height={label ? 112 : 140}
                         loading="lazy"
                       />
                     </figure>

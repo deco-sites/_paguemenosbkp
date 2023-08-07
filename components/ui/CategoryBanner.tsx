@@ -34,8 +34,8 @@ function Banner({ banner }: SectionProps<ReturnType<typeof loader>>) {
       <Picture preload class="col-start-1 col-span-1 row-start-1 row-span-1">
         <Source
           src={image.mobile}
-          width={360}
-          height={120}
+          width={240}
+          height={80}
           media="(max-width: 767px)"
         />
         <Source
