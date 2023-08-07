@@ -4,9 +4,13 @@
  * License: MIT (https://github.com/saadeghi/daisyui/blob/37bca23444bc9e4d304362c14b7088f9a08f1c74/LICENSE)
  * https://github.com/saadeghi/daisyui/blob/37bca23444bc9e4d304362c14b7088f9a08f1c74/src/docs/src/routes/theme-generator.svelte
  */
+import { Head } from "$fresh/runtime.ts";
+import { SectionProps } from "$live/types.ts";
+import googleFontsLoader, {
+  Props as GoogleFontsLoaderProps,
+} from "deco-sites/std/packs/font/loaders/googleFonts.ts";
 import { Color } from "https://deno.land/x/color@v0.3.0/mod.ts";
 import { useId } from "preact/hooks";
-import { Head } from "$fresh/runtime.ts";
 
 export interface MainColors {
   /**
@@ -286,7 +290,7 @@ export interface CustomFont {
   styleInnerHtml?: string;
 }
 
-export interface Props {
+export interface Props extends GoogleFontsLoaderProps {
   mainColors?: MainColors;
   /** These colors are automatically generated with darker tons of their originals */
   complementaryColors?: ComplementaryColors;
@@ -416,7 +420,8 @@ function Section({
   buttonStyle,
   font,
   customFont,
-}: Props) {
+  fontsSheet,
+}: Partial<SectionProps<typeof loader>>) {
   const id = useId();
   const theme = {
     ...defaultTheme,
@@ -449,13 +454,12 @@ function Section({
     <Head>
       <meta name="theme-color" content={theme["primary"]} />
       <meta name="msapplication-TileColor" content={theme["primary"]} />
-      {selectedFont && !customFont?.fontFamily && (
-        <link
-          href={`https://fonts.googleapis.com/css?family=${selectedFont}:300,400,600,700`}
-          rel="stylesheet"
+      {fontsSheet?.map((fontSheet) => (
+        <style
           type="text/css"
+          dangerouslySetInnerHTML={{ __html: fontSheet }}
         />
-      )}
+      ))}
       {customFont?.fontFamily && customFont?.styleInnerHtml && (
         <style
           type="text/css"
@@ -474,7 +478,7 @@ function Section({
   );
 }
 
-export function Preview(props: Props) {
+export function Preview(props: Partial<SectionProps<typeof loader>>) {
   const selectedFont = props.customFont?.fontFamily ||
     props.font?.other ||
     (props.font?.fontFamily !== "None" && props.font?.fontFamily);
@@ -663,5 +667,14 @@ export function Preview(props: Props) {
     </>
   );
 }
+
+export const loader = async (
+  props: Props,
+  req: Request,
+) => {
+  const fontProps = await googleFontsLoader(props, req);
+
+  return { ...props, ...fontProps };
+};
 
 export default Section;
