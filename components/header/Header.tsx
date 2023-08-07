@@ -82,7 +82,7 @@ function Header({
   const searchbar = { ..._searchbar, products, suggestions };
   return (
     <>
-      <header style={{ height: headerHeight }}>
+      <header className="pb-20 h-16 md:h-36">
         <div class="bg-base-100 sticky w-full z-50">
           <TopHeader
             searchbar={searchbar}
@@ -90,7 +90,7 @@ function Header({
             IconsLinks={IconsLinks}
           />
         </div>
-        <div class="bg-base-100 w-full z-40 pt-24 absolute">
+        <div class="bg-base-100 w-full z-40 md:pt-24 absolute">
           <Navbar items={navItems} />
         </div>
         <Modals

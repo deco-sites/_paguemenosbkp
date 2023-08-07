@@ -106,7 +106,7 @@ export default function BannerGrid({
   preload,
 }: Props) {
   return (
-    <section class="container w-full px-4 pt-6 pb-2 md:px-0 mx-auto overflow-x-auto md:overflow-visible">
+    <section class="container w-full mx-auto overflow-x-auto md:overflow-visible">
       <HeaderSections
         titleTop={header?.titleTop}
         titleBottom={header?.titleBottom}
@@ -126,7 +126,7 @@ export default function BannerGrid({
           }}
         class={`${
           !itemsPerLine?.mobile && "hidden"
-        } mt-4 flex md:grid min-w-fit w-[${
+        } px-4 pt-6 pb-2 mt-4 flex md:grid min-w-fit w-[${
           banners.length * 186
         }px] md:w-auto gap-0 md:gap-2 ${
           MOBILE_COLUMNS[itemsPerLine?.mobile ?? 2]

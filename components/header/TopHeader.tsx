@@ -20,7 +20,7 @@ export default function TopHeader({
       {/* Mobile Version */}
       <div
         style={{ minHeight: navbarHeight }}
-        className="md:hidden h-16 flex flex-col bg-base-100 fixed w-full z-50"
+        className="md:hidden h-20 flex flex-col bg-base-100 fixed w-full z-50"
       >
         <div className="flex justify-between items-center">
           <Buttons variant="menu" width={30} height={30} />
@@ -34,7 +34,9 @@ export default function TopHeader({
               <Image src={logo.src} alt={logo.alt} width={126} height={16} />
             </a>
           )}
+          <div class="text-[#0054A6]">
           <Buttons variant="search" width={30} height={30} />
+          </div>
           {IconsLinks?.length
             ? IconsLinks.map(({
               width,

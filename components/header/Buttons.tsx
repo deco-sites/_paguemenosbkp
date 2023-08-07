@@ -124,7 +124,7 @@ function CartButton({ width, height }: { width?: number; height?: number }) {
 
   return (
     <Button
-      class="btn btn-circle btn-ghost relative"
+      class="btn btn-circle btn-ghost relative pb-2"
       aria-label="open cart"
       data-deco={displayCart.value && "open-cart"}
       loading={loading.value}
