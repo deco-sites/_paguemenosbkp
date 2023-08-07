@@ -63,7 +63,7 @@ export type Props = EditableProps & {
 };
 
 function Searchbar({
-  placeholder = "What are you looking for?",
+  placeholder = "O que você procura?",
   action = "/s",
   name = "q",
   query,
@@ -89,7 +89,7 @@ function Searchbar({
         <form
           id="searchbar"
           action={action}
-          class="flex-grow flex gap-3 px-3 py-2 border border-base-200"
+          class="flex-grow flex gap-3 px-3 py-2 border rounded-md border-base-200 focus-within:border-[#0054A6] bg-[#f4f4f4] focus-within:bg-white focus-within:text-[#0054A6] text-base-300"
         >
           <Button
             class="btn-ghost"
@@ -98,7 +98,6 @@ function Searchbar({
             tabIndex={-1}
           >
             <Icon
-              class="text-base-300"
               id="MagnifyingGlass"
               size={20}
               strokeWidth={0.01}
@@ -107,7 +106,7 @@ function Searchbar({
           <input
             ref={searchInputRef}
             id="search-input"
-            class="flex-grow outline-none placeholder-shown:sibling:hidden"
+            class="flex-grow outline-none placeholder-shown:sibling:hidden bg-[#f4f4f4] focus-within:bg-white text-[#727273]"
             name={name}
             defaultValue={query}
             onInput={(e) => {
@@ -140,14 +139,14 @@ function Searchbar({
               setSearch("");
             }}
           >
-            <span class="text-sm">limpar</span>
+            { searchInputRef?.current?.value?.length ? <span class="text-sm">limpar</span> : ""}
           </button>
         </form>
-        {variant === "desktop" && <CloseButton />}
+        { searchInputRef?.current?.value?.length && variant === "desktop" ? <CloseButton /> : ""}
       </div>
       <div class="flex flex-col gap-6 divide-y divide-base-200 mt-6 empty:mt-0 md:flex-row md:divide-y-0">
-        {notFound
-          ? (
+        { searchInputRef?.current?.value?.length ?
+          notFound ? (
             <div class="py-16 md:py-6! flex flex-col gap-4 w-full">
               <span
                 class="font-medium text-xl text-center"
@@ -176,7 +175,7 @@ function Searchbar({
                   {loading.value && <Spinner />}
                 </div>
                 <ul id="search-suggestion" class="flex flex-col gap-6">
-                  {suggestions.value!.searches?.map(({ term }) => (
+                  {suggestions?.value!.searches?.map(({ term }) => (
                     <li>
                       <a href={`/s?q=${term}`} class="flex gap-4 items-center">
                         <span>
@@ -217,7 +216,8 @@ function Searchbar({
                 </Slider>
               </div>
             </>
-          )}
+          ) : ''
+        }
       </div>
     </div>
   );

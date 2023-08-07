@@ -1,4 +1,5 @@
 import { useId } from "preact/hooks";
+import { useRef, useEffect } from "preact/hooks";
 import AddToCartButton from "$store/islands/AddToCartButton.tsx";
 import ShippingSimulation from "$store/islands/ShippingSimulation.tsx";
 import Breadcrumb from "$store/components/ui/Breadcrumb.tsx";
@@ -55,7 +56,6 @@ function ProductInfo({ page }: { page: ProductDetailsPage }) {
     product,
   } = page;
   const {
-    description,
     productID,
     offers,
     name,
@@ -66,6 +66,13 @@ function ProductInfo({ page }: { page: ProductDetailsPage }) {
     offers,
   );
 
+  const ref = useRef<HTMLInputElement>(null);
+
+  const QUANTITY_MAX_VALUE = 100;
+
+  useEffect(() => {
+   console.log(ref?.current?.value, typeof ref?.current?.value)
+  })
   return (
     <>
       {/* Code and name */}
@@ -81,14 +88,22 @@ function ProductInfo({ page }: { page: ProductDetailsPage }) {
       </div>
       {/* Prices */}
       <div class="mt-4">
-        <div class="flex flex-row gap-2 items-center">
-          <span class="line-through text-base-300 text-xs">
-            {formatPrice(listPrice, offers!.priceCurrency!)}
-          </span>
+        <div class="flex flex-col items-center">
+          {listPrice && price ? listPrice > price && (
+            <div class="flex flex-row gap-2 items-center">
+              <span class="line-through text-base-300 text-xs">
+                {formatPrice(listPrice, offers!.priceCurrency!)}
+              </span>
+              <span>
+              {`${(100 - (100 / (listPrice / price)))
+                .toFixed(0)}% OFF`}
+              </span>
+            </div>    
+          ) : "" }
           <span class="font-medium text-xl text-secondary">
             {formatPrice(price, offers!.priceCurrency!)}
           </span>
-        </div>
+          </div>
         <span class="text-sm text-base-300">
           {installments}
         </span>
@@ -103,14 +118,57 @@ function ProductInfo({ page }: { page: ProductDetailsPage }) {
           ? (
             <>
               {seller && (
-                <AddToCartButton
-                  skuId={productID}
-                  sellerId={seller}
-                  price={price ?? 0}
-                  discount={price && listPrice ? listPrice - price : 0}
-                  name={product.name ?? ""}
-                  productGroupId={product.isVariantOf?.productGroupID ?? ""}
-                />
+                <div>
+                  <div>
+                    <div class="join border rounded-none">
+                      <Button
+                        class="btn-square btn-outline border-none join-item"
+                        onClick={ref?.current?.value ? () => {
+                          console.log(ref?.current?.value, typeof ref?.current?.value)
+                          return parseFloat(ref?.current?.value as string) - 1
+                        } : () => {}}
+                      >
+                        -
+                      </Button>
+                      <input
+                        ref={ref}
+                        class="input text-center join-item"
+                        type="number"
+                        inputMode="numeric"
+                        pattern="[0-9]*"
+                        value={1}
+                        max={QUANTITY_MAX_VALUE}
+                        min={1}
+                        // onBlur={(e) => onChange?.(e.currentTarget.valueAsNumber)}
+                      />
+                      <Button
+                        class="btn-square btn-outline border-none join-item"
+                        onClick={ref?.current?.value ? () => (Math.min(parseFloat(ref?.current?.value as string) + 1, QUANTITY_MAX_VALUE)) : () => {}}
+                      >
+                        +
+                      </Button>
+                    </div>
+                    {/* <QuantitySelector
+                      disabled={loading.value}
+                      quantity={0}
+                      onChange={withLoading(quantity => {
+                        const quantityDiff = quantity - quantityInput.value;
+                        if (quantityDiff < 0) return ''
+                        return quantityInput.value = quantity
+                      })}
+                    /> */}
+
+                    <AddToCartButton
+                      skuId={productID}
+                      sellerId={seller}
+                      price={price ?? 0}
+                      discount={price && listPrice ? listPrice - price : 0}
+                      name={product.name ?? ""}
+                      quantity={1}
+                      productGroupId={product.isVariantOf?.productGroupID ?? ""}
+                      />
+                  </div>
+                </div>
               )}
               <WishlistButton
                 variant="full"
@@ -130,20 +188,6 @@ function ProductInfo({ page }: { page: ProductDetailsPage }) {
             seller: seller ?? "1",
           }]}
         />
-      </div>
-      {/* Description card */}
-      <div class="mt-4 sm:mt-6">
-        <span class="text-sm">
-          {description && (
-            <details>
-              <summary class="cursor-pointer">Descrição</summary>
-              <div
-                class="ml-2 mt-2"
-                dangerouslySetInnerHTML={{ __html: description }}
-              />
-            </details>
-          )}
-        </span>
       </div>
       {/* Analytics Event */}
       <SendEventOnLoad
@@ -318,10 +362,26 @@ function Details({
           </ul>
 
           {/* Product Info */}
-          <div class="px-4 sm:pr-0 sm:pl-6 sm:col-start-3 sm:col-span-1 sm:row-start-1">
-            <ProductInfo page={page} />
+          <div>
+            <div class="px-4 sm:pr-0 sm:pl-6 sm:col-start-3 sm:col-span-1 sm:row-start-1">
+              <ProductInfo page={page} />
+            </div>
           </div>
         </div>
+        {/* Description card */}
+        <div class="mt-4 sm:mt-6">
+              <span class="text-sm">
+                {page?.product?.description && (
+                  <details>
+                    <summary class="cursor-pointer">Descrição</summary>
+                    <div
+                      class="ml-2 mt-2"
+                      dangerouslySetInnerHTML={{ __html: page.product.description }}
+                    />
+                  </details>
+                )}
+              </span>
+            </div>
         <SliderJS rootId={id}></SliderJS>
       </div>
     );

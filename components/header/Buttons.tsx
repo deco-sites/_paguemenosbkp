@@ -64,7 +64,7 @@ function CartButton() {
 
   return (
     <Button
-      class="btn btn-circle btn-sm btn-ghost relative"
+      class="btn btn-circle btn-ghost relative"
       aria-label="open cart"
       data-deco={displayCart.value && "open-cart"}
       loading={loading.value}
@@ -77,7 +77,7 @@ function CartButton() {
           </span>
         )}
         {!loading.value && (
-          <Icon id="ShoppingCart" width={20} height={20} strokeWidth={2} />
+          <Icon id="ShoppingCart" width={30} height={30} strokeWidth={4} />
         )}
       </div>
     </Button>

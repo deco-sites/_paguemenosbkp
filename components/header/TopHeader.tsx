@@ -1,6 +1,6 @@
 import Image from "deco-sites/std/components/Image.tsx";
 import Buttons from "$store/islands/HeaderButton.tsx";
-import Searchbar from "$store/islands/HeaderSearchbar.tsx";
+import SearchbarCustom from "$store/islands/HeaderSearchBarCustom.tsx";
 import Icon from "$store/components/ui/Icon.tsx";
 import { navbarHeight } from "./constants.ts";
 import type { Props as SearchbarProps } from "$store/components/search/Searchbar.tsx";
@@ -34,7 +34,7 @@ export default function TopHeader({
           <Buttons variant="cart" />
         </div>
         <div className="w-[300px]">
-          <Searchbar searchbar={searchbar} />
+          <SearchbarCustom searchbar={searchbar} />
         </div>
       </div>
 
@@ -52,7 +52,7 @@ export default function TopHeader({
         )}
         <Buttons variant="search" />
         <div className="lg:w-[300px]">
-          <Searchbar searchbar={searchbar} />
+          <SearchbarCustom searchbar={searchbar} />
           {/* <Searchbar /> */}
         </div>
         <a

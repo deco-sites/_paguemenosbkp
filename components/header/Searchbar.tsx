@@ -17,6 +17,7 @@ function Searchbar({ searchbar }: Props) {
   const open = displaySearchbar.value &&
     window?.matchMedia?.("(min-width: 768px)")?.matches;
 
+    console.log(searchbar)
   return (
     <div
       class={`${

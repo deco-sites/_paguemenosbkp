@@ -78,6 +78,7 @@
               "./islands/HeaderButton.tsx",
               "./islands/HeaderModals.tsx",
               "./islands/HeaderSearchbar.tsx",
+              "./islands/HeaderSearchBarCustom.tsx",
               "./islands/Newsletter.tsx",
               "./islands/OutOfStock.tsx",
               "./islands/ProductImageZoom.tsx",
@@ -17727,6 +17728,22 @@
         }
       }
     },
+    "Li9pc2xhbmRzL0hlYWRlclNlYXJjaEJhckN1c3RvbS50c3g=": {
+      "title": "./islands/HeaderSearchBarCustom.tsx",
+      "type": "object",
+      "required": [
+        "__resolveType"
+      ],
+      "properties": {
+        "__resolveType": {
+          "type": "string",
+          "enum": [
+            "./islands/HeaderSearchBarCustom.tsx"
+          ],
+          "default": "./islands/HeaderSearchBarCustom.tsx"
+        }
+      }
+    },
     "Li9pc2xhbmRzL05ld3NsZXR0ZXIudHN4": {
       "title": "./islands/Newsletter.tsx",
       "type": "object",
@@ -20023,6 +20040,9 @@
         },
         {
           "$ref": "#/definitions/Li9pc2xhbmRzL0hlYWRlclNlYXJjaGJhci50c3g="
+        },
+        {
+          "$ref": "#/definitions/Li9pc2xhbmRzL0hlYWRlclNlYXJjaEJhckN1c3RvbS50c3g="
         },
         {
           "$ref": "#/definitions/Li9pc2xhbmRzL05ld3NsZXR0ZXIudHN4"
