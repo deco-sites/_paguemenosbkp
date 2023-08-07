@@ -5,7 +5,7 @@ import { useUI } from "$store/sdk/useUI.ts";
 import { useCart } from "deco-sites/std/packs/vtex/hooks/useCart.ts";
 import { AnalyticsEvent } from "deco-sites/std/commerce/types.ts";
 
-function LoginButton({ width, height }) {
+function LoginButton({ width, height }: { width?: number; height?: number }) {
   const { displayLogin } = useUI();
 
   return (
@@ -16,12 +16,19 @@ function LoginButton({ width, height }) {
         displayLogin.value = !displayLogin.peek();
       }}
     >
-      <Icon id="Login" width={width ?? 40} height={height ?? 40} strokeWidth={2} />
+      <Icon
+        id="User"
+        width={width ?? 40}
+        height={height ?? 40}
+        strokeWidth={2}
+      />
     </Button>
   );
 }
 
-function LocationButton({ width, height }) {
+function LocationButton(
+  { width, height }: { width?: number; height?: number },
+) {
   const { displayLocation } = useUI();
 
   return (
@@ -32,28 +39,44 @@ function LocationButton({ width, height }) {
         displayLocation.value = !displayLocation.peek();
       }}
     >
-      <Icon id="Location" width={width ?? 40} height={height ?? 40} strokeWidth={2} />
+      <Icon
+        id="Location"
+        width={width ?? 40}
+        height={height ?? 40}
+        strokeWidth={2}
+      />
     </Button>
   );
 }
 
-function SearchButton({ width, height }) {
+function SearchButton(
+  { width, height }: { width?: number; height?: number },
+) {
   const { displaySearchbar } = useUI();
+  const open = displaySearchbar.value &&
+    window?.matchMedia?.("(min-width: 768px)")?.matches;
 
-  return (
-    <Button
-      class="btn btn-circle btn-ghost"
-      aria-label="search icon button"
-      onClick={() => {
-        displaySearchbar.value = !displaySearchbar.peek();
-      }}
-    >
-      <Icon id="MagnifyingGlass" width={width ?? 20} height={height ?? 20} strokeWidth={0.1} />
-    </Button>
-  );
+  return open ? <div /> : (
+    <div class="md:px-20 md:w-full">
+      <Button
+        class="btn h-6 md:h-16 btn-ghost md:w-full md:rounded-md md:bg-[#f4f4f4] md:flex md:justify-start px-2 py-2"
+        aria-label="search icon button"
+        onClick={() => {
+          displaySearchbar.value = !displaySearchbar.peek();
+        }}
+      >
+        <Icon
+          id="MagnifyingGlass"
+          width={width ?? 30}
+          height={height ?? 30}
+          strokeWidth={0.1}
+        />
+      </Button>
+    </div>
+  )
 }
 
-function MenuButton({ width, height }) {
+function MenuButton({ width, height }: { width?: number; height?: number }) {
   const { displayMenu } = useUI();
 
   return (
@@ -64,12 +87,17 @@ function MenuButton({ width, height }) {
         displayMenu.value = true;
       }}
     >
-      <Icon id="Bars3" width={width ?? 20} height={height ?? 20} strokeWidth={0.01} />
+      <Icon
+        id="Bars3"
+        width={width ?? 20}
+        height={height ?? 20}
+        strokeWidth={0.01}
+      />
     </Button>
   );
 }
 
-function CartButton({ width, height }) {
+function CartButton({ width, height }: { width?: number; height?: number }) {
   const { displayCart } = useUI();
   const { loading, cart, mapItemsToAnalyticsItems } = useCart();
   const totalItems = cart.value?.items.length || null;
@@ -109,14 +137,25 @@ function CartButton({ width, height }) {
           </span>
         )}
         {!loading.value && (
-          <Icon id="ShoppingCart" width={width ?? 40} height={height ?? 40} strokeWidth={4} />
+          <Icon
+            id="cart"
+            width={width ?? 40}
+            height={height ?? 40}
+            strokeWidth={4}
+          />
         )}
       </div>
     </Button>
   );
 }
 
-function Buttons({ variant, width = 40, height = 40 }: { variant: "cart" | "search" | "menu" | "login" | "location", width: number, height: number }) {
+function Buttons(
+  { variant, width = 40, height = 40 }: {
+    variant: "cart" | "search" | "menu" | "User" | "Location";
+    width?: number;
+    height?: number;
+  },
+) {
   if (variant === "cart") {
     return <CartButton width={width} height={height} />;
   }
@@ -129,7 +168,7 @@ function Buttons({ variant, width = 40, height = 40 }: { variant: "cart" | "sear
     return <MenuButton width={width} height={height} />;
   }
 
-  if (variant === "Login") {
+  if (variant === "User") {
     return <LoginButton width={width} height={height} />;
   }
 

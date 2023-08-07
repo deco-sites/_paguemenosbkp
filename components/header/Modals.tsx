@@ -16,15 +16,15 @@ interface Props {
 }
 
 function Modals({ menu, searchbar }: Props) {
-  const { 
+  const {
     displayCart,
     displayMenu,
     displaySearchbar,
     // displayLocation,
     // displayLogin
   } = useUI();
-  const formInputLogin = useRef<HTMLInputElement>(null)
-  const formInputLocation = useRef<HTMLInputElement>(null)
+  const formInputLogin = useRef<HTMLInputElement>(null);
+  const formInputLocation = useRef<HTMLInputElement>(null);
 
   const fallback = (
     <div class="flex justify-center items-center w-full h-full">
@@ -48,7 +48,8 @@ function Modals({ menu, searchbar }: Props) {
         </Suspense>
       </Modal>
 
-      {/* <Modal
+      {
+        /* <Modal
         title="Login"
         mode="center"
         loading="lazy"
@@ -89,12 +90,13 @@ function Modals({ menu, searchbar }: Props) {
             <button
               type="submit"
             >
-              
+
             </button>
             </form>
           </div>
         </Suspense>
-      </Modal> */}
+      </Modal> */
+      }
 
       <Modal
         title="Buscar"

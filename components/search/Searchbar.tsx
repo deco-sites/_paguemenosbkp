@@ -84,7 +84,7 @@ function Searchbar({
   }, []);
 
   return (
-    <div class="flex flex-col p-4 md:py-6 md:px-20">
+    <div class="w-full flex flex-col p-2 md:py-2 md:px-20">
       <div class="flex items-center gap-4">
         <form
           id="searchbar"
@@ -216,7 +216,7 @@ function Searchbar({
                     {suggestions.value!.products?.map((product, index) => (
                       <Slider.Item
                         index={index}
-                        class="carousel-item first:ml-4 last:mr-4 min-w-[200px] max-w-[200px]"
+                        class="carousel-item first:ml-4 last:mr-4 min-w-[240px] max-w-[240px]"
                       >
                         <ProductCard product={product} />
                       </Slider.Item>

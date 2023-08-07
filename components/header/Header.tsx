@@ -25,22 +25,22 @@ export interface NavItem {
 }
 
 export interface IconsLinks {
-  handleType?: "Link"
+  handleType?: "Link";
   label?: string;
   href?: string;
-  icon: "User" | "cart" | "Location"
+  icon: "User" | "cart" | "Location";
   /**
-  * @title Icon Width
-  * @description Icon Width in desktop, Width of Mobile is multiply width * 0.75
-  * */
+   * @title Icon Width
+   * @description Icon Width in desktop, Width of Mobile is multiply width * 0.75
+   */
   width?: number;
   /**
-  * @title Icon Height
-  * @description Icon Height in desktop, Height of Mobile is multiply height * 0.75
-  * */
+   * @title Icon Height
+   * @description Icon Height in desktop, Height of Mobile is multiply height * 0.75
+   */
   height?: number;
-  alignment?: "ICON | LABEL" | "LABEL | ICON"
-  isRenderInMobile?: false | true
+  alignment?: "ICON | LABEL" | "LABEL | ICON";
+  isRenderInMobile?: false | true;
 }
 
 export interface Props {
@@ -53,7 +53,7 @@ export interface Props {
    */
   navItems?: NavItem[];
 
-  IconsLinks?: IconsLinks[]
+  IconsLinks?: IconsLinks[];
 
   /**
    * @title Product suggestions
@@ -85,9 +85,13 @@ function Header({
     <>
       <header style={{ height: headerHeight }}>
         <div class="bg-base-100 sticky w-full z-50">
-          <TopHeader searchbar={searchbar} logo={logo} IconsLinks={IconsLinks} />
+          <TopHeader
+            searchbar={searchbar}
+            logo={logo}
+            IconsLinks={IconsLinks}
+          />
         </div>
-        <div class="bg-base-100 w-full z-10 pt-10">
+        <div class="bg-base-100 w-full z-40 pt-24 absolute">
           <Navbar items={navItems} />
         </div>
         <Modals
