@@ -58,7 +58,7 @@ function Header({
   logo,
 }: Props) {
   const searchbar = { ..._searchbar, products, suggestions };
-  console.log(searchbar, "HEADER")
+  console.log(searchbar, "HEADER");
   return (
     <>
       <header style={{ height: headerHeight }}>
