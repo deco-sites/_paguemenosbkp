@@ -4,6 +4,7 @@ import type { JSX } from "preact";
 export type AvailableIcons =
   | "ArrowsPointingOut"
   | "Bars3"
+  | "cart"
   | "ChevronLeft"
   | "ChevronRight"
   | "ChevronUp"
@@ -20,6 +21,7 @@ export type AvailableIcons =
   | "Heart"
   | "Instagram"
   | "Linkedin"
+  | "Location"
   | "Minus"
   | "MapPin"
   | "MagnifyingGlass"
@@ -32,7 +34,6 @@ export type AvailableIcons =
   | "Return"
   | "Ruler"
   | "ReclameAqui"
-  | "ShoppingCart"
   | "Star"
   | "Tiktok"
   | "Trash"

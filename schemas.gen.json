@@ -78,7 +78,7 @@
               "./islands/HeaderButton.tsx",
               "./islands/HeaderModals.tsx",
               "./islands/HeaderSearchbar.tsx",
-              "./islands/HeaderSearchBarCustom.tsx",
+              "./islands/HeaderSearchbarCustom.tsx",
               "./islands/Newsletter.tsx",
               "./islands/OutOfStock.tsx",
               "./islands/ProductImageZoom.tsx",
@@ -10988,6 +10988,11 @@
                   },
                   {
                     "type": "string",
+                    "const": "cart",
+                    "default": "cart"
+                  },
+                  {
+                    "type": "string",
                     "const": "ChevronLeft",
                     "default": "ChevronLeft"
                   },
@@ -11068,6 +11073,11 @@
                   },
                   {
                     "type": "string",
+                    "const": "Location",
+                    "default": "Location"
+                  },
+                  {
+                    "type": "string",
                     "const": "Minus",
                     "default": "Minus"
                   },
@@ -11125,11 +11135,6 @@
                     "type": "string",
                     "const": "ReclameAqui",
                     "default": "ReclameAqui"
-                  },
-                  {
-                    "type": "string",
-                    "const": "ShoppingCart",
-                    "default": "ShoppingCart"
                   },
                   {
                     "type": "string",
@@ -12337,6 +12342,111 @@
       },
       "title": "NavItem[]"
     },
+    "ZGVjby1zaXRlcy9wYWd1ZW1lbm9zL2NvbXBvbmVudHMvaGVhZGVyL0hlYWRlci50c3g=@IconsLinks": {
+      "type": "object",
+      "properties": {
+        "handleType": {
+          "type": "string",
+          "const": "Link",
+          "default": "Link",
+          "title": "Handle Type"
+        },
+        "label": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "title": "Label"
+        },
+        "href": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "title": "Href"
+        },
+        "icon": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "User",
+              "default": "User"
+            },
+            {
+              "type": "string",
+              "const": "cart",
+              "default": "cart"
+            },
+            {
+              "type": "string",
+              "const": "Location",
+              "default": "Location"
+            }
+          ],
+          "type": "string",
+          "title": "Icon"
+        },
+        "width": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "title": "Icon Width",
+          "description": "Icon Width in desktop, Width of Mobile is multiply width * 0.75"
+        },
+        "height": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "title": "Icon Height",
+          "description": "Icon Height in desktop, Height of Mobile is multiply height * 0.75"
+        },
+        "alignment": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "ICON | LABEL",
+              "default": "ICON | LABEL"
+            },
+            {
+              "type": "string",
+              "const": "LABEL | ICON",
+              "default": "LABEL | ICON"
+            }
+          ],
+          "type": "string",
+          "title": "Alignment"
+        },
+        "isRenderInMobile": {
+          "anyOf": [
+            {
+              "type": "boolean",
+              "const": false,
+              "default": false
+            },
+            {
+              "type": "boolean",
+              "const": true,
+              "default": true
+            }
+          ],
+          "type": "boolean",
+          "title": "Is Render In Mobile"
+        }
+      },
+      "required": [
+        "icon"
+      ],
+      "title": "IconsLinks"
+    },
+    "ZGVjby1zaXRlcy9wYWd1ZW1lbm9zL2NvbXBvbmVudHMvaGVhZGVyL0hlYWRlci50c3g=@IconsLinks[]": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ZGVjby1zaXRlcy9wYWd1ZW1lbm9zL2NvbXBvbmVudHMvaGVhZGVyL0hlYWRlci50c3g=@IconsLinks"
+      },
+      "title": "IconsLinks[]"
+    },
     "ZGVjby1zaXRlcy9wYWd1ZW1lbm9zL2NvbXBvbmVudHMvaGVhZGVyL0hlYWRlci50c3g=@Props": {
       "type": "object",
       "properties": {
@@ -12355,6 +12465,10 @@
           "$ref": "#/definitions/ZGVjby1zaXRlcy9wYWd1ZW1lbm9zL2NvbXBvbmVudHMvaGVhZGVyL0hlYWRlci50c3g=@NavItem[]",
           "title": "Navigation items",
           "description": "Navigation items used both on mobile and desktop menus"
+        },
+        "IconsLinks": {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9wYWd1ZW1lbm9zL2NvbXBvbmVudHMvaGVhZGVyL0hlYWRlci50c3g=@IconsLinks[]",
+          "title": " Icons Links"
         },
         "products": {
           "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tbWVyY2UvdHlwZXMudHM=@Product[]|null",
@@ -13439,6 +13553,11 @@
             },
             {
               "type": "string",
+              "const": "cart",
+              "default": "cart"
+            },
+            {
+              "type": "string",
               "const": "ChevronLeft",
               "default": "ChevronLeft"
             },
@@ -13519,6 +13638,11 @@
             },
             {
               "type": "string",
+              "const": "Location",
+              "default": "Location"
+            },
+            {
+              "type": "string",
               "const": "Minus",
               "default": "Minus"
             },
@@ -13576,11 +13700,6 @@
               "type": "string",
               "const": "ReclameAqui",
               "default": "ReclameAqui"
-            },
-            {
-              "type": "string",
-              "const": "ShoppingCart",
-              "default": "ShoppingCart"
             },
             {
               "type": "string",
@@ -17728,8 +17847,8 @@
         }
       }
     },
-    "Li9pc2xhbmRzL0hlYWRlclNlYXJjaEJhckN1c3RvbS50c3g=": {
-      "title": "./islands/HeaderSearchBarCustom.tsx",
+    "Li9pc2xhbmRzL0hlYWRlclNlYXJjaGJhckN1c3RvbS50c3g=": {
+      "title": "./islands/HeaderSearchbarCustom.tsx",
       "type": "object",
       "required": [
         "__resolveType"
@@ -17738,9 +17857,9 @@
         "__resolveType": {
           "type": "string",
           "enum": [
-            "./islands/HeaderSearchBarCustom.tsx"
+            "./islands/HeaderSearchbarCustom.tsx"
           ],
-          "default": "./islands/HeaderSearchBarCustom.tsx"
+          "default": "./islands/HeaderSearchbarCustom.tsx"
         }
       }
     },
@@ -20042,7 +20161,7 @@
           "$ref": "#/definitions/Li9pc2xhbmRzL0hlYWRlclNlYXJjaGJhci50c3g="
         },
         {
-          "$ref": "#/definitions/Li9pc2xhbmRzL0hlYWRlclNlYXJjaEJhckN1c3RvbS50c3g="
+          "$ref": "#/definitions/Li9pc2xhbmRzL0hlYWRlclNlYXJjaGJhckN1c3RvbS50c3g="
         },
         {
           "$ref": "#/definitions/Li9pc2xhbmRzL05ld3NsZXR0ZXIudHN4"

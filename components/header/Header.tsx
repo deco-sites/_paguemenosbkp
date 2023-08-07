@@ -24,6 +24,25 @@ export interface NavItem {
   };
 }
 
+export interface IconsLinks {
+  handleType?: "Link"
+  label?: string;
+  href?: string;
+  icon: "User" | "cart" | "Location"
+  /**
+  * @title Icon Width
+  * @description Icon Width in desktop, Width of Mobile is multiply width * 0.75
+  * */
+  width?: number;
+  /**
+  * @title Icon Height
+  * @description Icon Height in desktop, Height of Mobile is multiply height * 0.75
+  * */
+  height?: number;
+  alignment?: "ICON | LABEL" | "LABEL | ICON"
+  isRenderInMobile?: false | true
+}
+
 export interface Props {
   alerts: string[];
   /** @title Search Bar */
@@ -33,6 +52,8 @@ export interface Props {
    * @description Navigation items used both on mobile and desktop menus
    */
   navItems?: NavItem[];
+
+  IconsLinks?: IconsLinks[]
 
   /**
    * @title Product suggestions
@@ -51,6 +72,7 @@ export interface Props {
 
 function Header({
   alerts,
+  IconsLinks,
   searchbar: _searchbar,
   products,
   navItems = [],
@@ -58,12 +80,12 @@ function Header({
   logo,
 }: Props) {
   const searchbar = { ..._searchbar, products, suggestions };
-  console.log(searchbar, "HEADER")
+
   return (
     <>
       <header style={{ height: headerHeight }}>
         <div class="bg-base-100 sticky w-full z-50">
-          <TopHeader searchbar={searchbar} logo={logo} />
+          <TopHeader searchbar={searchbar} logo={logo} IconsLinks={IconsLinks} />
         </div>
         <div class="bg-base-100 w-full z-10 pt-10">
           <Navbar items={navItems} />

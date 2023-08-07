@@ -5,23 +5,55 @@ import { useUI } from "$store/sdk/useUI.ts";
 import { useCart } from "deco-sites/std/packs/vtex/hooks/useCart.ts";
 import { AnalyticsEvent } from "deco-sites/std/commerce/types.ts";
 
-function SearchButton() {
+function LoginButton({ width, height }) {
+  const { displayLogin } = useUI();
+
+  return (
+    <Button
+      class="btn btn-circle btn-ghost"
+      aria-label="search icon button"
+      onClick={() => {
+        displayLogin.value = !displayLogin.peek();
+      }}
+    >
+      <Icon id="Login" width={width ?? 40} height={height ?? 40} strokeWidth={2} />
+    </Button>
+  );
+}
+
+function LocationButton({ width, height }) {
+  const { displayLocation } = useUI();
+
+  return (
+    <Button
+      class="btn btn-circle btn-ghost"
+      aria-label="search icon button"
+      onClick={() => {
+        displayLocation.value = !displayLocation.peek();
+      }}
+    >
+      <Icon id="Location" width={width ?? 40} height={height ?? 40} strokeWidth={2} />
+    </Button>
+  );
+}
+
+function SearchButton({ width, height }) {
   const { displaySearchbar } = useUI();
 
   return (
     <Button
-      class="btn btn-circle btn-sm btn-ghost"
+      class="btn btn-circle btn-ghost"
       aria-label="search icon button"
       onClick={() => {
         displaySearchbar.value = !displaySearchbar.peek();
       }}
     >
-      <Icon id="MagnifyingGlass" width={20} height={20} strokeWidth={0.1} />
+      <Icon id="MagnifyingGlass" width={width ?? 20} height={height ?? 20} strokeWidth={0.1} />
     </Button>
   );
 }
 
-function MenuButton() {
+function MenuButton({ width, height }) {
   const { displayMenu } = useUI();
 
   return (
@@ -32,12 +64,12 @@ function MenuButton() {
         displayMenu.value = true;
       }}
     >
-      <Icon id="Bars3" width={20} height={20} strokeWidth={0.01} />
+      <Icon id="Bars3" width={width ?? 20} height={height ?? 20} strokeWidth={0.01} />
     </Button>
   );
 }
 
-function CartButton() {
+function CartButton({ width, height }) {
   const { displayCart } = useUI();
   const { loading, cart, mapItemsToAnalyticsItems } = useCart();
   const totalItems = cart.value?.items.length || null;
@@ -77,24 +109,32 @@ function CartButton() {
           </span>
         )}
         {!loading.value && (
-          <Icon id="ShoppingCart" width={30} height={30} strokeWidth={4} />
+          <Icon id="ShoppingCart" width={width ?? 40} height={height ?? 40} strokeWidth={4} />
         )}
       </div>
     </Button>
   );
 }
 
-function Buttons({ variant }: { variant: "cart" | "search" | "menu" }) {
+function Buttons({ variant, width = 40, height = 40 }: { variant: "cart" | "search" | "menu" | "login" | "location", width: number, height: number }) {
   if (variant === "cart") {
-    return <CartButton />;
+    return <CartButton width={width} height={height} />;
   }
 
   if (variant === "search") {
-    return <SearchButton />;
+    return <SearchButton width={width} height={height} />;
   }
 
   if (variant === "menu") {
-    return <MenuButton />;
+    return <MenuButton width={width} height={height} />;
+  }
+
+  if (variant === "Login") {
+    return <LoginButton width={width} height={height} />;
+  }
+
+  if (variant === "Location") {
+    return <LocationButton width={width} height={height} />;
   }
 
   return null;

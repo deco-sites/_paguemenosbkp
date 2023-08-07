@@ -14,8 +14,8 @@ function SearchbarCustom({ searchbar }: Props) {
   return (
     <div
       class={`
-        block border-y border-base-200 shadow absolute left-0 top-0 w-screen z-50 bg-base-100`}
-      style={{ marginTop: headerHeight }}
+        block w-full bg-base-100`}
+      // style={{ marginTop: headerHeight }}s
     >
       <Suspense fallback={<span class="loading loading-ring" />}>
         <LazySearchbar {...searchbar} variant="desktop" />
