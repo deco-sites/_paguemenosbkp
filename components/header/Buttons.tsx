@@ -73,7 +73,7 @@ function SearchButton(
         />
       </Button>
     </div>
-  )
+  );
 }
 
 function MenuButton({ width, height }: { width?: number; height?: number }) {
