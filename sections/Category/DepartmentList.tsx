@@ -56,7 +56,9 @@ function CardText(
       }`}
     >
       {tag && <div class="text-sm text-white">{tag}</div>}
-      {label && <h3 class="text-base lg:text-lg text-white text-center">{label}</h3>}
+      {label && (
+        <h3 class="text-base lg:text-lg text-white text-center">{label}</h3>
+      )}
       {description && <div class="text-sm text-white">{description}</div>}
     </div>
   );

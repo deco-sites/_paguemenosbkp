@@ -35,7 +35,7 @@ export default function TopHeader({
             </a>
           )}
           <div class="text-[#0054A6]">
-          <Buttons variant="search" width={30} height={30} />
+            <Buttons variant="search" width={30} height={30} />
           </div>
           {IconsLinks?.length
             ? IconsLinks.map(({
