@@ -27,7 +27,7 @@ export default function TopHeader({
           {logo && (
             <a
               href="/"
-              class="flex-grow inline-flex items-center"
+              class="flex-grow flex justify-center items-center pl-4"
               style={{ minHeight: navbarHeight }}
               aria-label="Store logo"
             >
@@ -87,7 +87,7 @@ export default function TopHeader({
           {logo && (
             <a
               href="/"
-              class="flex-grow inline-flex items-center"
+              class="flex-grow inline-flex items-center pl-4"
               style={{ minHeight: navbarHeight }}
               aria-label="Store logo"
             >

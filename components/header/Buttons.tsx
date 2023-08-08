@@ -57,7 +57,7 @@ function SearchButton(
     window?.matchMedia?.("(min-width: 768px)")?.matches;
 
   return open ? <div /> : (
-    <div class="md:px-20 md:w-full">
+    <div class="md:px-14 md:w-full">
       <Button
         class="btn h-6 md:h-16 btn-ghost md:w-full md:rounded-md md:bg-[#f4f4f4] md:flex md:justify-start px-2 py-2"
         aria-label="search icon button"
