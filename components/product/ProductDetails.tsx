@@ -1,5 +1,5 @@
 import { useId } from "preact/hooks";
-import { useEffect, useRef } from "preact/hooks";
+import { useRef } from "preact/hooks";
 import AddToCartButton from "$store/islands/AddToCartButton.tsx";
 import ShippingSimulation from "$store/islands/ShippingSimulation.tsx";
 import Breadcrumb from "$store/components/ui/Breadcrumb.tsx";
@@ -68,11 +68,6 @@ function ProductInfo({ page }: { page: ProductDetailsPage }) {
 
   const ref = useRef<HTMLInputElement>(null);
 
-  const QUANTITY_MAX_VALUE = 100;
-
-  useEffect(() => {
-    console.log(ref?.current?.value, typeof ref?.current?.value);
-  });
   return (
     <>
       {/* Code and name */}
@@ -88,25 +83,32 @@ function ProductInfo({ page }: { page: ProductDetailsPage }) {
       </div>
       {/* Prices */}
       <div class="mt-4">
-        <div class="flex flex-col items-center">
-          {listPrice && price
-            ? listPrice > price && (
-              <div class="flex flex-row gap-2 items-center">
-                <span class="line-through text-base-300 text-xs">
-                  {formatPrice(listPrice, offers!.priceCurrency!)}
-                </span>
-                <span>
-                  {`${
-                    (100 - (100 / (listPrice / price)))
-                      .toFixed(0)
-                  }% OFF`}
-                </span>
+        <div class="flex flex-col items-baseline justify-center">
+          {listPrice === price
+            ? (
+              <div class="text-lg md:text-2xl font-bold text-[#0054a6] min-h-[64px]">
+                {formatPrice(price, offers!.priceCurrency!)}
               </div>
             )
-            : ""}
-          <span class="font-medium text-xl text-secondary">
-            {formatPrice(price, offers!.priceCurrency!)}
-          </span>
+            : (
+              <>
+                <div class="flex flex-row items-center">
+                  <span
+                    class={`text-xs text-[rgba(237,29,36,.8)] line-through mr-4`}
+                  >
+                    {formatPrice(listPrice, offers!.priceCurrency!)}
+                  </span>
+                  <span class={`text-xs text-[rgba(237,29,36,.8)]`}>
+                    {listPrice && price
+                      ? `${(100 - (100 / (listPrice / price))).toFixed(0)}% OFF`
+                      : ""}
+                  </span>
+                </div>
+                <div class="text-lg md:text-2xl font-bold text-[#0054A6]">
+                  {formatPrice(price, offers!.priceCurrency!)}
+                </div>
+              </>
+            )}
         </div>
         <span class="text-sm text-base-300">
           {installments}
@@ -124,74 +126,24 @@ function ProductInfo({ page }: { page: ProductDetailsPage }) {
               {seller && (
                 <div>
                   <div>
-                    <div class="join border rounded-none">
-                      <Button
-                        class="btn-square btn-outline border-none join-item"
-                        onClick={ref?.current?.value
-                          ? () => {
-                            console.log(
-                              ref?.current?.value,
-                              typeof ref?.current?.value,
-                            );
-                            return parseFloat(ref?.current?.value as string) -
-                              1;
-                          }
-                          : () => {}}
-                      >
-                        -
-                      </Button>
-                      <input
-                        ref={ref}
-                        class="input text-center join-item"
-                        type="number"
-                        inputMode="numeric"
-                        pattern="[0-9]*"
-                        value={1}
-                        max={QUANTITY_MAX_VALUE}
-                        min={1}
-                        // onBlur={(e) => onChange?.(e.currentTarget.valueAsNumber)}
-                      />
-                      <Button
-                        class="btn-square btn-outline border-none join-item"
-                        onClick={ref?.current?.value
-                          ? () => (Math.min(
-                            parseFloat(ref?.current?.value as string) + 1,
-                            QUANTITY_MAX_VALUE,
-                          ))
-                          : () => {}}
-                      >
-                        +
-                      </Button>
-                    </div>
-                    {
-                      /* <QuantitySelector
-                      disabled={loading.value}
-                      quantity={0}
-                      onChange={withLoading(quantity => {
-                        const quantityDiff = quantity - quantityInput.value;
-                        if (quantityDiff < 0) return ''
-                        return quantityInput.value = quantity
-                      })}
-                    /> */
-                    }
-
                     <AddToCartButton
                       skuId={productID}
                       sellerId={seller}
                       price={price ?? 0}
                       discount={price && listPrice ? listPrice - price : 0}
                       name={product.name ?? ""}
-                      quantity={1}
                       productGroupId={product.isVariantOf?.productGroupID ?? ""}
                     />
                   </div>
                 </div>
               )}
-              <WishlistButton
+              {
+                /* <WishlistButton
                 variant="full"
                 productGroupID={isVariantOf?.productGroupID}
                 productID={productID}
-              />
+              /> */
+              }
             </>
           )
           : <OutOfStock productID={productID} />}
@@ -311,10 +263,10 @@ function Details({
         />
         <div
           id={id}
-          class="grid grid-cols-1 gap-4 sm:grid-cols-[max-content_40vw_40vw] sm:grid-rows-1 sm:justify-center"
+          class="grid grid-cols-1 gap-4 sm:grid-cols-[max-content_40vw_40vw] sm:grid-rows-1 sm:justify-center bg-white rounded-md"
         >
           {/* Image Slider */}
-          <div class="relative sm:col-start-2 sm:col-span-1 sm:row-start-1">
+          <div class="relative sm:col-start-2 sm:col-span-1 sm:row-start-1 bg-white rounded-md">
             <Slider class="carousel carousel-center gap-6 w-screen sm:w-[40vw]">
               {images.map((img, index) => (
                 <Slider.Item
@@ -361,7 +313,7 @@ function Details({
           </div>
 
           {/* Dots */}
-          <ul class="flex gap-2 sm:justify-start overflow-auto px-4 sm:px-0 sm:flex-col sm:col-start-1 sm:col-span-1 sm:row-start-1">
+          <ul class="flex gap-2 sm:justify-start overflow-auto px-4 sm:px-0 sm:flex-col sm:col-start-1 sm:col-span-1 sm:row-start-1 bg-white">
             {images.map((img, index) => (
               <li class="min-w-[63px] sm:min-w-[100px]">
                 <Slider.Dot index={index}>
@@ -379,25 +331,27 @@ function Details({
           </ul>
 
           {/* Product Info */}
-          <div>
-            <div class="px-4 sm:pr-0 sm:pl-6 sm:col-start-3 sm:col-span-1 sm:row-start-1">
+          <div class="bg-white rounded-md">
+            <div class="px-4 sm:pr-0 sm:pl-4 sm:col-start-3 sm:col-span-1 sm:row-start-1 bg-white rounded-md">
               <ProductInfo page={page} />
             </div>
           </div>
         </div>
         {/* Description card */}
-        <div class="mt-4 sm:mt-6">
-          <span class="text-sm">
+        <div class="mt-4 sm:mt-6 px-4 py-2 md:p-0">
+          <div class="text-sm bg-white rounded-md md:px-2 py-2">
             {page?.product?.description && (
-              <details>
-                <summary class="cursor-pointer">Descrição</summary>
+              // <details>
+              <>
+                <h3 class="cursor-pointer ml-2 mb-2 text-lg">Descrição</h3>
                 <div
                   class="ml-2 mt-2"
                   dangerouslySetInnerHTML={{ __html: page.product.description }}
                 />
-              </details>
+              </>
+              // </details>
             )}
-          </span>
+          </div>
         </div>
         <SliderJS rootId={id}></SliderJS>
       </div>

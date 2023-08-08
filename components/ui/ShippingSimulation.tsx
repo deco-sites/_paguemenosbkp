@@ -98,14 +98,14 @@ function ShippingSimulation({ items }: Props) {
   return (
     <div class="flex flex-col gap-2">
       <div class="flex flex-col">
-        <span>Calcular frete</span>
+        <span class="mb-4">Informações de entrega</span>
         <span>
           Informe seu CEP para consultar os prazos de entrega
         </span>
       </div>
       <div>
         <form
-          class="join"
+          class="join pb-8"
           onSubmit={(e) => {
             e.preventDefault();
             handleSimulation();
@@ -114,7 +114,7 @@ function ShippingSimulation({ items }: Props) {
           <input
             as="input"
             type="text"
-            class="input input-bordered join-item"
+            class="input input-bordered join-item rounded-full px-4"
             placeholder="Seu cep aqui"
             value={postalCode.value}
             maxLength={8}
@@ -122,8 +122,12 @@ function ShippingSimulation({ items }: Props) {
               postalCode.value = e.currentTarget.value;
             }}
           />
-          <Button type="submit" loading={loading.value} class="join-item">
-            Calcular
+          <Button
+            type="submit"
+            loading={loading.value}
+            class="join-item bg-white border border-gray-500 rounded-3xl"
+          >
+            Ok
           </Button>
         </form>
       </div>

@@ -9,7 +9,6 @@ export interface Options {
   sellerId?: string;
   price: number;
   discount: number;
-  quantity: number;
   /**
    * sku name
    */
@@ -18,13 +17,13 @@ export interface Options {
 }
 
 export const useAddToCart = (
-  { skuId, sellerId, price, discount, name, productGroupId, quantity }: Options,
+  { skuId, sellerId, price, discount, name, productGroupId }: Options,
 ) => {
   const isAddingToCart = useSignal(false);
   const { displayCart } = useUI();
   const { addItems } = useCart();
 
-  const onClick = useCallback(async (e: MouseEvent) => {
+  const onClick = useCallback(async (e: MouseEvent, quantity: number) => {
     e.preventDefault();
     e.stopPropagation();
 

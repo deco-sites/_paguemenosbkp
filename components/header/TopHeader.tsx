@@ -110,12 +110,14 @@ export default function TopHeader({
             }) => // handleType === "Modal" &&
             (
               <a
-                class={`flex ${
-                  alignment !== "ICON | LABEL" ? "flex-row-reverse" : "flex-row"
+                class={`flex items-center ${
+                  alignment !== "ICON | LABEL"
+                    ? "flex-row-reverse justify-between"
+                    : "flex-row justify-between"
                 } py-3`}
                 href={href}
               >
-                <div class="btn btn-circle text-[#0054A6] bg-[#f4f4f4] p-1">
+                <div class="btn btn-circle text-[#0054A6] bg-[#f4f4f4] p-1 flex items-center">
                   {icon === "cart"
                     ? (
                       <Buttons
@@ -133,7 +135,7 @@ export default function TopHeader({
                       />
                     )}
                 </div>
-                <p class="mx-1 text-sm">{label ?? ""}</p>
+                <p class="mx-3 text-sm">{label ?? ""}</p>
               </a>
             ))
             : ""}
