@@ -10,6 +10,7 @@ export default function MobileApps(
               <img
                 width="135"
                 height="40"
+                alt="Baixe nosso app na Apple Store"
                 src="/image/app-apple.png"
               />
             </a>
@@ -19,6 +20,7 @@ export default function MobileApps(
               <img
                 width="135"
                 height="40"
+                alt="Baixe nosso app na Google Play"
                 src="/image/app-android.png"
               />
             </a>
