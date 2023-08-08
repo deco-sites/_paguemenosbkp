@@ -122,7 +122,7 @@ function ProductInfo({ page }: { page: ProductDetailsPage }) {
       <div class="mt-4 sm:mt-10 flex flex-col gap-2">
         {availability === "https://schema.org/InStock"
           ? (
-            <>
+            <div class="fixed w-full bottom-0 left-0 pl-4 py-2 md:p-0 bg-white z-50 md:static">
               {seller && (
                 <div>
                   <div>
@@ -144,7 +144,7 @@ function ProductInfo({ page }: { page: ProductDetailsPage }) {
                 productID={productID}
               /> */
               }
-            </>
+            </div>
           )
           : <OutOfStock productID={productID} />}
       </div>

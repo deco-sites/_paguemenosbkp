@@ -31,7 +31,7 @@ function AddToCartButton(
 
   return (
     <div class="flex flex-row">
-      <div class="join border-none rounded-none">
+      <div class="join border border-gray-500 rounded-full">
         <Button
           class={`btn-md bg-white border-none join-item rounded-l-full ${
             quantity.value > 1 && "text-[#0054A6]"
